@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Chat WebSocket</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <div class="container my-4">
+            <h1 class="text-center">CHAT SOPORTE USUARIOS</h1>
+            <div class="row">
+                <div class="col">
+                    <div class="my-4">
+                        <label>Mensaje:</label>
+                        <textarea id="mensaje" class="form-control" placeholder="Mensaje..." ></textarea>
+                    </div>
+                    <div class="my-4">
+                        <button id="btn_enviar" class="btn btn-primary form-control "> Enviar </button>
+                    </div>
+                </div>
+                <div class="col chat-body">
+                    <div class="card-header">Chat</div>
+                    <div id="conversacion"></div>
+                    <script src="java_script/codigo.js"></script>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+
