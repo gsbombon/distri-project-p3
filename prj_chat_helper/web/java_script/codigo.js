@@ -31,10 +31,6 @@
     function onMessage(evt) {
         var obj = JSON.parse(evt.data),
                 msg = '<h5>' + obj.nombre + ' </h5><p>' + obj.mensaje + '</p>';
-        mensajes.innerHTML += '<div class="chat-img"> \n\
-                                    <img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar2.png"></img> \n\
-                                </div> \n\
-                                <div class="chat-body"> \n\
-                                    <div class="chat-message">' + msg + '</div> </div>';
+        mensajes.innerHTML += msg;
     }
 })(window, document, JSON);
