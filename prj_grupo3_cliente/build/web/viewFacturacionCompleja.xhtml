@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Facturacion</title>
+        <link rel="stylesheet" type="text/css" href="./xmlhttp/css/rime/rime.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </h:head>
+    <h:body>
+        <h:body>
+            <ui:include src="header.xhtml" />
+
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-5">Facturacion</h1>
+                    <p class="lead">Pagina compleja para realizar compras dentro de la tienda. </p>
+                    <hr class=""></hr>
+                </div>
+            </div>
+
+            <div id="content" class="container my-5">
+                <h:form>
+                    <h1 class="form-label text-center"> Facturas </h1>
+                    <div class="row">
+                        <div class="col">
+
+                            <h2 class="form-label text-center"> Cabecera </h2>
+                            <br></br>
+
+                            <label class="form-label"> Factura # </label>
+                            <h:inputText id="numCabecera" value="#{cabeceraFactura_crud.numCabecera}" class="form-control"/>
+                            <br></br>
+                            <label class="form-label"> Ruc Cliente </label>
+                            <h:selectOneMenu id="cliente" value="#{cabeceraFactura_crud.rucCliente}" class="form-control">
+                                <f:selectItems value="#{cabeceraFactura_crud.cli_crud.listaRucClientes}" />
+                            </h:selectOneMenu>
+                            <br></br>
+                            <label class="form-label"> Ciudad de entrega </label>
+                            <h:selectOneMenu id="ciudad" value="#{cabeceraFactura_crud.cfCiudad}" class="form-control">
+                                <f:selectItems value="#{cabeceraFactura_crud.ciu_crud.listaNombreCiudades}" />
+                            </h:selectOneMenu>
+                            <br></br>
+                            <label class="form-label"> Fecha de Facturacion </label>
+                            <h:inputText class="form-control" p:placeholder="DD/MM/YYYY" value="#{cabeceraFactura_crud.fecha}" id="fecha" size="9" ></h:inputText>  
+
+                            <br></br><br></br>
+                            <h:commandButton id="insertarCabeceraFactura" value="Crear" action="#{cabeceraFactura_crud.crearCabeceraFactura}" class="btn btn-primary mx-3" >
+                            </h:commandButton>
+                            <h:commandButton id="elminarCabeceraFactura" value="Eliminar" action="#{cabeceraFactura_crud.eliminarCabeceraFactura}" class="btn btn-danger mx-3">
+                            </h:commandButton>
+                            <h:commandButton id="actualizarCabeceraFactura" value="Actualizar" action="#{cabeceraFactura_crud.actualizarCabeceraFactura}" class="btn btn-success mx-3">
+                            </h:commandButton>
+                            <h:commandButton id="buscarCabeceraFactura" value="Buscar" action="#{cabeceraFactura_crud.buscarCabeceraFactura}" class="btn btn-info mx-3">
+                            </h:commandButton>
+                            <h:commandButton id="reset" value="Reset" action="#{cabeceraFactura_crud.limpiarForm()}" class="btn btn-dark text-white mx-3">
+                            </h:commandButton>
+                            <div class="row mt-4" >
+                                <h4>#{cabeceraFactura_crud.mensajeCabecera}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col mx-3">
+                            <h2 class="form-label text-center"> Detalle </h2>
+                            <div>
+
+                                <div class="row my-3">
+                                    <div class="row my-3 mx-3">
+                                        <label class="form-label"> Factura # </label>
+                                        <h:inputText id="numCabeceraDetalle" value="#{cabeceraFactura_crud.numCabecera}" class="form-control"  disabled="true" />
+                                    </div>
+                                    <div class="col" >
+                                        <label class="form-label"> Seleccione producto </label>
+                                        <h:selectOneMenu id="ciudadDetalle" value="#{cabeceraFactura_crud.nombreItem}" class="form-control">
+                                            <f:selectItems value="#{cabeceraFactura_crud.listaNombreArticulo}" />
+                                        </h:selectOneMenu>
+                                    </div> 
+                                    <div class="col" >
+                                        <label class="form-label"> Cantidad </label>
+                                        <h:inputText id="numDetale" value="#{cabeceraFactura_crud.cantidadItem}" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row my-3">
+                                    <div class="col" >
+                                        <h:commandButton id="agregarItem" value="Agregar Producto" action="#{cabeceraFactura_crud.agregarItem()}" class="btn btn-primary mx-3" >
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col" >
+                                        <p>#{cabeceraFactura_crud.mensajeItem}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h:dataTable value="#{cabeceraFactura_crud.df_crud.itemsDetalle}" var="items" class="table table-striped mt-4" >
+                                <h:column>
+                                    <f:facet name="header">Articulo</f:facet>
+                                        #{items.nombreItem}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Precio Unit</f:facet>  
+                                        #{items.precioItem}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Cantidad</f:facet>  
+                                        #{items.cantidadItem}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Precio Total</f:facet>
+                                        #{items.precioTotalItem}
+                                </h:column>
+                            </h:dataTable>    
+
+                            <div class="row">
+                                <div class="col text-center">
+                                    <h4> PRECIO TOTAL </h4>
+                                </div>
+                                <div class="col text-center ">
+                                    <h3> #{cabeceraFactura_crud.df_crud.precioTotal} </h3>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col text-center">
+                                    <p> Su factura esta lista ? </p>
+                                </div>
+                                <div class="col text-center">
+                                    <h:commandButton id="crearFactura" value="Crear Factura" action="#{cabeceraFactura_crud.crearFactura}" class="btn btn-primary mx-3 form-control " >
+                                    </h:commandButton>
+                                </div>
+                                <div class="row" >
+                                    <h4>#{cabeceraFactura_crud.mensajeFactura}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </h:form>
+            </div>
+
+
+        </h:body>
+
+    </h:body>
+
+</html>
