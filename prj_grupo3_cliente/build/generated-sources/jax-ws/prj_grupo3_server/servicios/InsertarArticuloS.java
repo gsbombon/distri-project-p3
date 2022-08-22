@@ -8,22 +8,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for insertarArticuloS complex type.
+ * <p>Clase Java para insertarArticuloS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="insertarArticuloS">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Nombre_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Precio_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Stock_Articulo" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="insertarArticuloS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Nombre_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Precio_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="Stock_Articulo" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -44,7 +44,7 @@ public class InsertarArticuloS {
     protected int stockArticulo;
 
     /**
-     * Gets the value of the nombreArticulo property.
+     * Obtiene el valor de la propiedad nombreArticulo.
      * 
      * @return
      *     possible object is
@@ -56,7 +56,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Sets the value of the nombreArticulo property.
+     * Define el valor de la propiedad nombreArticulo.
      * 
      * @param value
      *     allowed object is
@@ -68,7 +68,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Gets the value of the precioArticulo property.
+     * Obtiene el valor de la propiedad precioArticulo.
      * 
      * @return
      *     possible object is
@@ -80,7 +80,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Sets the value of the precioArticulo property.
+     * Define el valor de la propiedad precioArticulo.
      * 
      * @param value
      *     allowed object is
@@ -92,7 +92,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Gets the value of the stockArticulo property.
+     * Obtiene el valor de la propiedad stockArticulo.
      * 
      */
     public int getStockArticulo() {
@@ -100,7 +100,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Sets the value of the stockArticulo property.
+     * Define el valor de la propiedad stockArticulo.
      * 
      */
     public void setStockArticulo(int value) {

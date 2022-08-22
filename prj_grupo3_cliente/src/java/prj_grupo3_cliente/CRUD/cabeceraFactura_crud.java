@@ -181,7 +181,7 @@ public class cabeceraFactura_crud {
     public void crearCabeceraFactura() {
         int resultado;
         try {
-            resultado = port.crearCabeceraFacturaS(numCabecera, rucCliente, fecha, cfCiudad);
+            resultado = port.crearCabeceraFacturaS(rucCliente, fecha, cfCiudad);
             if (resultado == 1) {
                 this.limpiarForm();
                 mensajeCabecera = "Creada correctamente";

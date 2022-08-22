@@ -8,21 +8,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for crearCabeceraInventarioS complex type.
+ * <p>Clase Java para crearCabeceraInventarioS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="crearCabeceraInventarioS">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="codigo_tmov" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="crearCabeceraInventarioS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="codigo_tmov" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="fecha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -39,7 +39,7 @@ public class CrearCabeceraInventarioS {
     protected String fecha;
 
     /**
-     * Gets the value of the codigoTmov property.
+     * Obtiene el valor de la propiedad codigoTmov.
      * 
      */
     public int getCodigoTmov() {
@@ -47,7 +47,7 @@ public class CrearCabeceraInventarioS {
     }
 
     /**
-     * Sets the value of the codigoTmov property.
+     * Define el valor de la propiedad codigoTmov.
      * 
      */
     public void setCodigoTmov(int value) {
@@ -55,7 +55,7 @@ public class CrearCabeceraInventarioS {
     }
 
     /**
-     * Gets the value of the fecha property.
+     * Obtiene el valor de la propiedad fecha.
      * 
      * @return
      *     possible object is
@@ -67,7 +67,7 @@ public class CrearCabeceraInventarioS {
     }
 
     /**
-     * Sets the value of the fecha property.
+     * Define el valor de la propiedad fecha.
      * 
      * @param value
      *     allowed object is

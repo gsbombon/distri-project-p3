@@ -8,20 +8,20 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for eliminarArticuloS complex type.
+ * <p>Clase Java para eliminarArticuloS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="eliminarArticuloS">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Codigo_Articulo" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="eliminarArticuloS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Codigo_Articulo" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -36,7 +36,7 @@ public class EliminarArticuloS {
     protected int codigoArticulo;
 
     /**
-     * Gets the value of the codigoArticulo property.
+     * Obtiene el valor de la propiedad codigoArticulo.
      * 
      */
     public int getCodigoArticulo() {
@@ -44,7 +44,7 @@ public class EliminarArticuloS {
     }
 
     /**
-     * Sets the value of the codigoArticulo property.
+     * Define el valor de la propiedad codigoArticulo.
      * 
      */
     public void setCodigoArticulo(int value) {
