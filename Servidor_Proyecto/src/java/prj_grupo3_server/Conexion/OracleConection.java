@@ -36,10 +36,37 @@ public class OracleConection {
     }
 
     // METHODS FOR LOGIN
-    public static void singInOrc(String user, String pass) {
-
+    public static int loginOrc(String usuario, String contrasena) throws SQLException {
+        String sql = "SELECT * FROM usuarios WHERE usuario=? AND pass=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, usuario);
+        statement.setString(2, contrasena);
+        ResultSet result = statement.executeQuery();
+        
+        int i = 0;
+        
+        while (result.next()) {
+            i++;
+        }
+        
+        if (i > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
+    public static void insertarUsuarioOrc(String nombre, String password) throws SQLException {
+        String sql = "INSERT INTO usuarios(usuario,pass) VALUES (?,?)";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, nombre);
+        statement.setString(2, password);
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Insertado correctamente !");
+        }
+    }
+    
     //CRUD FOR CIUDAD
     public static void insertarCiudadOrc(String nombre) throws SQLException {
         String sql = "INSERT INTO ciudad(nombre_ciu) VALUES (?)";

@@ -75,8 +75,10 @@ import static prj_grupo3_server.Conexion.OracleConection.eliminarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.insertarUsuarioOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.loginOrc;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.DetalleFactura;
@@ -634,17 +636,21 @@ public class ServicioServer {
 
     @WebMethod(operationName = "loginS")
     public int loginS(@WebParam(name = "Usuario") String Usuario, @WebParam(name = "Contrasena") String Contrasena) {
-        Conectar();
-        int op = login(Usuario, Contrasena);
+        ConectarO();
+        int op = 0;
+        try {
+            op = loginOrc(Usuario, Contrasena);
+        } catch (SQLException ex) {
+            System.out.println(""+ex.getMessage());
+        }
         return op;
     }
 
     @WebMethod(operationName = "crearUsuarioS")
-    public int crearUsuarioS(@WebParam(name = "user") String user,
-            @WebParam(name = "pass") String pass) {
+    public int crearUsuarioS(@WebParam(name = "user") String user, @WebParam(name = "pass") String pass) {
         try {
-            Conectar();
-            insertarUsuario(user, pass);
+            ConectarO();
+            insertarUsuarioOrc(user, pass);
             return 1;
         } catch (Exception e) {
             return 2;

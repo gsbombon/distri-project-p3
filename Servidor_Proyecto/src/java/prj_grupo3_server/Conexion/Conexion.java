@@ -875,7 +875,6 @@ public class Conexion {
         } else {
             return 0;
         }
-
     }
 
     public static void actualizarStockArticulo(String articulo, String cantidad) {
