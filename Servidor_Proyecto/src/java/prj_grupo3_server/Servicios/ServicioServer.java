@@ -67,17 +67,30 @@ import static prj_grupo3_server.Conexion.Conexion.listarMovimiento;
 import static prj_grupo3_server.Conexion.Conexion.login;
 import static prj_grupo3_server.Conexion.Conexion.singIn;
 import static prj_grupo3_server.Conexion.OracleConection.ConectarO;
+import static prj_grupo3_server.Conexion.OracleConection.actualizarArticuloOrc;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.actualizarMovimientoOrc;
+import static prj_grupo3_server.Conexion.OracleConection.buscarArticuloNOrc;
+import static prj_grupo3_server.Conexion.OracleConection.buscarArticuloOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.buscarMovimientoNOrc;
+import static prj_grupo3_server.Conexion.OracleConection.buscarMovimientoOrc;
+import static prj_grupo3_server.Conexion.OracleConection.crearCabeceraInventarioOrc;
+import static prj_grupo3_server.Conexion.OracleConection.eliminarArticuloOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.eliminarMovimientoOrc;
+import static prj_grupo3_server.Conexion.OracleConection.insertarArticuloOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.insertarMovimientoOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarUsuarioOrc;
+import static prj_grupo3_server.Conexion.OracleConection.listarArticuloOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.listarMovimientoOrc;
 import static prj_grupo3_server.Conexion.OracleConection.loginOrc;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
@@ -339,11 +352,11 @@ public class ServicioServer {
 
     /*----------CRUD ARTICULOS------------*/
     @WebMethod(operationName = "insertarArticuloS")
-    public int insertarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo, @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "Stock_Articulo") String cantidad) {
+    public int insertarArticuloS( @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "Stock_Articulo") int cantidad) {
         System.out.println("1");
         try {
-            Conectar();
-            insertarArticulo(codigo, nombre, precio, cantidad);
+            ConectarO();
+            insertarArticuloOrc(nombre, precio, cantidad);
 
             return 1;
         } catch (Exception e) {
@@ -352,11 +365,10 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "actualizarArticuloS")
-    public int actualizarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo, @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "PStock_Articulo") String cantidad) {
+    public int actualizarArticuloS(@WebParam(name = "Codigo_Articulo") int codigo, @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "PStock_Articulo") int cantidad) {
         try {
-            Conectar();
-            actualizarArticulo(codigo, nombre, precio, cantidad);
-
+            ConectarO();
+            actualizarArticuloOrc(codigo, nombre, precio, cantidad);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -364,10 +376,10 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "eliminarArticuloS")
-    public int eliminarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo) {
+    public int eliminarArticuloS(@WebParam(name = "Codigo_Articulo") int codigo) {
         try {
-            Conectar();
-            eliminarArticulo(codigo);
+            ConectarO();
+            eliminarArticuloOrc(codigo);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -377,38 +389,50 @@ public class ServicioServer {
     @WebMethod(operationName = "listarArticuloS")
     public ArrayList<Articulo> listarArticuloS() {
 
-        Conectar();
+        ConectarO();
         ArrayList<Articulo> art = new ArrayList<>();
-        art = listarArticulo();
+        try {
+            art = listarArticuloOrc();
+        } catch (SQLException ex) {
+            System.out.println(""+ex.getMessage());
+        }
         return art;
     }
 
+    
     @WebMethod(operationName = "buscarArticuloS")
-    public Articulo buscarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo) {
+    public Articulo buscarArticuloS(@WebParam(name = "Codigo_Articulo") int codigo) {
 
-        Conectar();
+        ConectarO();
         Articulo art = new Articulo();
-        art = buscarArticulo(codigo);
+        try {
+            art = buscarArticuloOrc(codigo);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return art;
     }
 
     @WebMethod(operationName = "buscarArticuloSN")
     public Articulo buscarArticuloSN(@WebParam(name = "Nombre_Articulo") String nombre) {
 
-        Conectar();
+        ConectarO();
         Articulo art = new Articulo();
-        art = buscarArticuloN(nombre);
+        try {
+            art = buscarArticuloNOrc(nombre);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return art;
     }
 
     /*----------CRUD TIPO MOVIMIENTO------------*/
     @WebMethod(operationName = "insertarMovimientoS")
-    public int insertarMovimientoS(@WebParam(name = "codigo") String codigo, @WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
+    public int insertarMovimientoS( @WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
         System.out.println("1");
         try {
-            Conectar();
-            insertarMovimiento(codigo, nombre, signo);
-
+            ConectarO();
+            insertarMovimientoOrc( nombre, signo);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -416,11 +440,10 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "actualizarMovimientoS")
-    public int actualizarMovimientoS(@WebParam(name = "codigo") String codigo, @WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
+    public int actualizarMovimientoS(@WebParam(name = "codigo") int codigo, @WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
         try {
-            Conectar();
-            actualizarMovimiento(codigo, nombre, signo);
-
+            ConectarO();
+            actualizarMovimientoOrc(codigo, nombre, signo);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -428,10 +451,10 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "eliminarMovimientoS")
-    public int eliminarMovimientoS(@WebParam(name = "codigo") String codigo) {
+    public int eliminarMovimientoS(@WebParam(name = "codigo") int codigo) {
         try {
             Conectar();
-            eliminarMovimiento(codigo);
+            eliminarMovimientoOrc(codigo);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -440,28 +463,42 @@ public class ServicioServer {
 
     @WebMethod(operationName = "listarMovimientoS")
     public ArrayList<Movimiento> listarMovimientoS() {
-
-        Conectar();
+        ConectarO();
         ArrayList<Movimiento> mov = new ArrayList<>();
-        mov = listarMovimiento();
+        try {
+            mov = listarMovimientoOrc();
+        } catch (SQLException ex) {
+            System.out.println(""+ex.getMessage());
+        }
+        
         return mov;
     }
 
     @WebMethod(operationName = "buscarMovimientoS")
-    public Movimiento buscarMovimientoS(@WebParam(name = "codigo") String codigo) {
+    public Movimiento buscarMovimientoS(@WebParam(name = "codigo") int codigo) {
 
-        Conectar();
+        ConectarO();
         Movimiento mov = new Movimiento();
-        mov = buscarMovimiento(codigo);
+        
+        try {
+            mov = buscarMovimientoOrc(codigo);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return mov;
     }
 
     @WebMethod(operationName = "buscarMovimientoSN")
     public Movimiento buscarMovimientoSN(@WebParam(name = "nombre") String nombre) {
 
-        Conectar();
+        ConectarO();
         Movimiento mov = new Movimiento();
-        mov = buscarMovimientoN(nombre);
+        
+        try {
+            mov = buscarMovimientoNOrc(nombre);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return mov;
     }
 
@@ -672,6 +709,18 @@ public class ServicioServer {
         try {
             Conectar();
             actualizarStockArticulo(nomArticulo, nuevoStock);
+            return 1;
+        } catch (Exception e) {
+            return 2;
+        }
+    }
+    
+    @WebMethod(operationName = "crearCabeceraInventarioS")
+    public int crearCabeceraInventarioS(@WebParam(name = "codigo_tmov") int movimiento,
+            @WebParam(name = "fecha") String fecha){
+        try {
+            ConectarO();
+            crearCabeceraInventarioOrc(movimiento, fecha);
             return 1;
         } catch (Exception e) {
             return 2;

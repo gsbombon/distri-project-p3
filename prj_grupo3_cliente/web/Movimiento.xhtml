@@ -28,7 +28,7 @@
                     <h:form id="form" >
                         <h4 class="form-label text-center"> FORMULARIO</h4>
                         <label class="form-label">Codigo</label>
-                        <h:inputText id="cedula" value="#{movimiento_crud.codigo}" class="form-control" />
+                        <h:inputText id="cedula" value="#{movimiento_crud.codigo}" class="form-control" readonly = "true"/>
                         <br></br>
                         <label class="form-label">Nombre</label>
                         <h:inputText id="nombre" value="#{movimiento_crud.nombre}" class="form-control"/>
@@ -42,7 +42,7 @@
                         </h:commandButton>
                         <h:commandButton id="actualizarMovimiento" value="Actualizar" action="#{movimiento_crud.actualizarMovimiento}" class="btn btn-success mx-3">
                         </h:commandButton>
-                        <h:commandButton id="buscarMovimiento" value="Buscar" action="#{movimiento_crud.buscarMovimiento}" class="btn btn-info mx-3">
+                        <h:commandButton id="buscarMovimiento" value="Buscar" action="#{movimiento_crud.buscarMovimientoN}" class="btn btn-info mx-3">
                         </h:commandButton>
                     </h:form>   
                 </div>

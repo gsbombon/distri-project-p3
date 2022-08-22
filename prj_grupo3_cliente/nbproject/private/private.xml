@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/lizpu/OneDrive/Documents/github/distri-project-p3/prj_grupo3_cliente/src/java/prj_grupo3_cliente/CRUD/cabeceraFactura_crud.java</file>
+            <file>file:/C:/Users/lizpu/OneDrive/Documents/github/distri-project-p3/prj_grupo3_cliente/src/java/prj_grupo3_cliente/CRUD/cabeceraInventario_crud.java</file>
+            <file>file:/C:/Users/lizpu/OneDrive/Documents/github/distri-project-p3/prj_grupo3_cliente/web/header.xhtml</file>
+            <file>file:/C:/Users/lizpu/OneDrive/Documents/github/distri-project-p3/prj_grupo3_cliente/web/Inventario.xhtml</file>
+        </group>
     </open-files>
 </project-private>

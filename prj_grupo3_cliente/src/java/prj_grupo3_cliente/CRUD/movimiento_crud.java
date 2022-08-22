@@ -16,7 +16,7 @@ import prj_grupo3_server.servicios.ServicioWebServidor;
 public class movimiento_crud {
     private ServicioWebServidor service = new ServicioWebServidor();
     ServicioServer port = service.getServicioServerPort();
-    public String codigo = "";
+    public int codigo;
     public String nombre = "";
     public String signo = "";
     public String mensaje = "";
@@ -36,13 +36,15 @@ public class movimiento_crud {
     public movimiento_crud() {
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+
+    
 
     public String getNombre() {
         return nombre;
@@ -76,7 +78,7 @@ public class movimiento_crud {
     {
     int resultado;
         try {
-            resultado = port.insertarMovimientoS(codigo, nombre, signo);
+            resultado = port.insertarMovimientoS(nombre, signo);
             if (resultado == 1) {
                 mensaje = "Se insertó satisfactoriamente";
                 this.listarMovimiento();
@@ -90,7 +92,7 @@ public class movimiento_crud {
     }
     
     public void limpiarFormulario(){
-        codigo="";
+        codigo= Integer.parseInt(" ");
         nombre="";
         signo="";
     }
@@ -143,7 +145,7 @@ public class movimiento_crud {
     public void buscarMovimientoN()      
     {
         movimiento= port.buscarMovimientoSN(nombre);
-        codigo = movimiento.getCodigo();
+        codigo = Integer.parseInt(movimiento.getCodigo());
         signo =movimiento.getSigno();
     }
 }

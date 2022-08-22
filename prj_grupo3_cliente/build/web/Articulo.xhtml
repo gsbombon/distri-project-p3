@@ -28,7 +28,7 @@
                     <h:form id="form" >
                         <h4 class="form-label text-center"> FORMULARIO</h4>
                         <label class="form-label">Codigo</label>
-                        <h:inputText id="cedula" value="#{articulo_crud.codigo}" class="form-control" />
+                        <h:inputText id="cedula" value="#{articulo_crud.codigo}" class="form-control" readonly = "true"/>
                         <br></br>
                         <label class="form-label">Nombre</label>
                         <h:inputText id="nombre" value="#{articulo_crud.nombre}" class="form-control"/>
@@ -46,7 +46,7 @@
                         </h:commandButton>
                         <h:commandButton id="actualizarArticulo" value="Actualizar" action="#{articulo_crud.actualizarArticulo}" class="btn btn-success mx-3">
                         </h:commandButton>
-                        <h:commandButton id="buscarArticulo" value="Buscar" action="#{articulo_crud.buscarArticulo}" class="btn btn-info mx-3">
+                        <h:commandButton id="buscarArticulo" value="Buscar" action="#{articulo_crud.buscarArticuloN}" class="btn btn-info mx-3">
                         </h:commandButton>
                     </h:form>   
                 </div>
