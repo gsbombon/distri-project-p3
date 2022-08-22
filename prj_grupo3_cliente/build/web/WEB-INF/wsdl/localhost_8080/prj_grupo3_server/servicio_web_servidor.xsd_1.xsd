@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://Servicios.prj_grupo3_server/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Servicios.prj_grupo3_server/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://Servicios.prj_grupo3_server/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Servicios.prj_grupo3_server/">
 
 <xs:element name="SingIn" type="tns:SingIn"/>
 
@@ -293,7 +293,6 @@
 
 <xs:complexType name="insertarCiudadS">
 <xs:sequence>
-<xs:element name="Codigo_Ciudad" type="xs:string" minOccurs="0"/>
 <xs:element name="Nombre_Ciudad" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
@@ -481,6 +480,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="actualizarStockArticuloS">
+<xs:sequence>
+<xs:element name="nomArticulo" type="xs:string" minOccurs="0"/>
+<xs:element name="nuevoStock" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarStockArticuloSResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="agregarProductoS">
 <xs:sequence>
 <xs:element name="numFactura" type="xs:string" minOccurs="0"/>
@@ -515,19 +527,6 @@
 <xs:element name="fecha" type="xs:string" minOccurs="0"/>
 <xs:element name="numCabecera" type="xs:string" minOccurs="0"/>
 <xs:element name="rucCliente" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="actualizarStockArticuloS">
-<xs:sequence>
-<xs:element name="nomArticulo" type="xs:string" minOccurs="0"/>
-<xs:element name="nuevoStock" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="actualizarStockArticuloSResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -921,18 +920,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="buscarFormaPagoS">
-<xs:sequence>
-<xs:element name="Codigo_FP" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="buscarFormaPagoSResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:formaPago" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="eliminarArticuloS">
 <xs:sequence>
 <xs:element name="Codigo_Articulo" type="xs:string" minOccurs="0"/>
@@ -942,6 +929,18 @@
 <xs:complexType name="eliminarArticuloSResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarFormaPagoS">
+<xs:sequence>
+<xs:element name="Codigo_FP" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarFormaPagoSResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:formaPago" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

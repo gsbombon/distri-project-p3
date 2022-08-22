@@ -96,7 +96,6 @@ public class Conexion {
         persona.put("Codigo_Ciudad", codigo);
         persona.put("Nombre_Ciudad", nombre);
         col.insert((DBObject) JSON.parse(persona.toString()));
-
     }
 
     public static void actualizarCliente(String ruc, String nombre, String dir) {

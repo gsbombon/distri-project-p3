@@ -1,16 +1,17 @@
 package prj_grupo3_server.Servicios;
 
-import prj_grupo3_server.Conexion.Conexion;
+import java.sql.SQLException;
+
 import static prj_grupo3_server.Conexion.Conexion.Conectar;
-import static prj_grupo3_server.Conexion.Conexion.actualizarCiudad;
+
 import static prj_grupo3_server.Conexion.Conexion.actualizarCliente;
 import static prj_grupo3_server.Conexion.Conexion.buscarCiudad;
 import static prj_grupo3_server.Conexion.Conexion.buscarCliente;
-import static prj_grupo3_server.Conexion.Conexion.eliminarCiudad;
+
 import static prj_grupo3_server.Conexion.Conexion.eliminarCliente;
-import static prj_grupo3_server.Conexion.Conexion.insertarCiudad;
+
 import static prj_grupo3_server.Conexion.Conexion.insertarCliente;
-import static prj_grupo3_server.Conexion.Conexion.listarCiudad;
+
 import static prj_grupo3_server.Conexion.Conexion.listarCliente;
 import static prj_grupo3_server.Conexion.Conexion.actualizarCobrador;
 import static prj_grupo3_server.Conexion.Conexion.buscarCobrador;
@@ -27,6 +28,8 @@ import prj_grupo3_server.Modelo.Cobrador;
 import prj_grupo3_server.Modelo.FormaPago;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -63,6 +66,12 @@ import static prj_grupo3_server.Conexion.Conexion.listarFactura;
 import static prj_grupo3_server.Conexion.Conexion.listarMovimiento;
 import static prj_grupo3_server.Conexion.Conexion.login;
 import static prj_grupo3_server.Conexion.Conexion.singIn;
+import static prj_grupo3_server.Conexion.OracleConection.ConectarO;
+import static prj_grupo3_server.Conexion.OracleConection.actualizarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.buscarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.eliminarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.insertarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.listarCiudadOrc;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.DetalleFactura;
@@ -79,8 +88,7 @@ public class ServicioServer {
     public int SingIn(@WebParam(name = "user") String user, @WebParam(name = "pass") String pass) {
         System.out.println("1");
         try {
-            Conectar();
-
+            ConectarO();
             singIn(user, pass);
             return 1;
         } catch (Exception e) {
@@ -89,14 +97,13 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "insertarCiudadS")
-    public int insertarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad, @WebParam(name = "Nombre_Ciudad") String Nombre_Ciudad) {
-        System.out.println("1");
+    public int insertarCiudadS(@WebParam(name = "Nombre_Ciudad") String Nombre_Ciudad) {
         try {
-            Conectar();
-            insertarCiudad(Codigo_Ciudad, Nombre_Ciudad);
-
+            ConectarO();
+            insertarCiudadOrc(Nombre_Ciudad);
             return 1;
         } catch (Exception e) {
+            System.out.println("" + e.getMessage());
             return 2;
         }
     }
@@ -117,9 +124,8 @@ public class ServicioServer {
     @WebMethod(operationName = "actualizarCiudadS")
     public int actualizarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad, @WebParam(name = "Nombre_Ciudad") String Nombre_Ciudad) {
         try {
-            Conectar();
-            actualizarCiudad(Codigo_Ciudad, Nombre_Ciudad);
-
+            ConectarO();
+            actualizarCiudadOrc(Codigo_Ciudad, Nombre_Ciudad);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -141,10 +147,12 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarCiudadS")
     public int eliminarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad) {
         try {
-            Conectar();
-            eliminarCiudad(Codigo_Ciudad);
+            ConectarO();
+            int cod = Integer.parseInt(Codigo_Ciudad);
+            eliminarCiudadOrc(cod);
             return 1;
         } catch (Exception e) {
+            System.out.println("" + e.getMessage());
             return 2;
         }
     }
@@ -162,10 +170,13 @@ public class ServicioServer {
 
     @WebMethod(operationName = "listarCiudadS")
     public ArrayList<Ciudad> listarCiudadS() {
-
-        Conectar();
         ArrayList<Ciudad> ciudades = new ArrayList<>();
-        ciudades = listarCiudad();
+        try {
+            ConectarO();
+            ciudades = listarCiudadOrc();
+        } catch (SQLException ex) {
+            System.out.println("" + ex.getMessage());
+        }
         return ciudades;
     }
 
@@ -180,10 +191,14 @@ public class ServicioServer {
 
     @WebMethod(operationName = "buscarCiudadS")
     public Ciudad buscarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad) {
-
-        Conectar();
+        ConectarO();
         Ciudad ciudadB = new Ciudad();
-        ciudadB = buscarCiudad(Codigo_Ciudad);
+        try {    
+            int cod_ciu = Integer.parseInt(Codigo_Ciudad);
+            ciudadB = buscarCiudadOrc(cod_ciu);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return ciudadB;
     }
 
@@ -309,7 +324,7 @@ public class ServicioServer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-         /*----------CRUD ARTICULOS------------*/
+    /*----------CRUD ARTICULOS------------*/
     @WebMethod(operationName = "insertarArticuloS")
     public int insertarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo, @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "Stock_Articulo") String cantidad) {
         System.out.println("1");
@@ -324,7 +339,7 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "actualizarArticuloS")
-    public int actualizarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo, @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "PStock_Articulo") String cantidad){
+    public int actualizarArticuloS(@WebParam(name = "Codigo_Articulo") String codigo, @WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "PStock_Articulo") String cantidad) {
         try {
             Conectar();
             actualizarArticulo(codigo, nombre, precio, cantidad);
@@ -363,7 +378,7 @@ public class ServicioServer {
         art = buscarArticulo(codigo);
         return art;
     }
-    
+
     @WebMethod(operationName = "buscarArticuloSN")
     public Articulo buscarArticuloSN(@WebParam(name = "Nombre_Articulo") String nombre) {
 
@@ -372,7 +387,7 @@ public class ServicioServer {
         art = buscarArticuloN(nombre);
         return art;
     }
-    
+
     /*----------CRUD TIPO MOVIMIENTO------------*/
     @WebMethod(operationName = "insertarMovimientoS")
     public int insertarMovimientoS(@WebParam(name = "codigo") String codigo, @WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
@@ -427,7 +442,7 @@ public class ServicioServer {
         mov = buscarMovimiento(codigo);
         return mov;
     }
-    
+
     @WebMethod(operationName = "buscarMovimientoSN")
     public Movimiento buscarMovimientoSN(@WebParam(name = "nombre") String nombre) {
 
@@ -461,6 +476,7 @@ public class ServicioServer {
             return 2;
         }
     }
+
     @WebMethod(operationName = "crearDetalleFacturacxcS")
     public int crearDetalleFacturacxcS(@WebParam(name = "numFactura") String numFactura) {
         try {
@@ -482,7 +498,8 @@ public class ServicioServer {
             return 2;
         }
     }
-     @WebMethod(operationName = "eliminarDetalleFacturacxcS")
+
+    @WebMethod(operationName = "eliminarDetalleFacturacxcS")
     public int eliminarDetalleFacturacxcS(@WebParam(name = "numFactura") String numFactura) {
         try {
             Conectar();
@@ -525,7 +542,7 @@ public class ServicioServer {
         cf = buscarCabeceraFactura(numCabecera);
         return cf;
     }
-    
+
     @WebMethod(operationName = "buscarFacturaS")
     public Factura buscarFacturaS(@WebParam(name = "numCabecera") String numCabecera) {
         Conectar();
@@ -533,8 +550,7 @@ public class ServicioServer {
         cf = buscarFactura(numCabecera);
         return cf;
     }
-    
-    
+
     @WebMethod(operationName = "buscarCabeceraFacturaPorRucS")
     public CabeceraFactura buscarCabeceraFacturaPorRucS(@WebParam(name = "rucCliente") String rucCliente) {
         Conectar();
@@ -550,7 +566,8 @@ public class ServicioServer {
         detalleFac = buscarDetalleFactura(numCabecera);
         return detalleFac;
     }
-     @WebMethod(operationName = "buscarDetalleFacturacxcS")
+
+    @WebMethod(operationName = "buscarDetalleFacturacxcS")
     public DetalleFacturacxc buscarDetalleFacturacxcS(@WebParam(name = "numCabecera") String numCabecera) {
         Conectar();
         DetalleFacturacxc detalleFac = new DetalleFacturacxc();
@@ -587,7 +604,7 @@ public class ServicioServer {
             return 2;
         }
     }
-    
+
     @WebMethod(operationName = "agregarPagaS")
     public int agregarPagaS(@WebParam(name = "numFactura") String numFactura,
             @WebParam(name = "fechapagoItem") String fechapagoItem,
@@ -603,7 +620,6 @@ public class ServicioServer {
             return 2;
         }
     }
-    
 
     @WebMethod(operationName = "loginS")
     public int loginS(@WebParam(name = "Usuario") String Usuario, @WebParam(name = "Contrasena") String Contrasena) {
@@ -611,19 +627,19 @@ public class ServicioServer {
         int op = login(Usuario, Contrasena);
         return op;
     }
-    
+
     @WebMethod(operationName = "crearUsuarioS")
     public int crearUsuarioS(@WebParam(name = "user") String user,
             @WebParam(name = "pass") String pass) {
         try {
             Conectar();
-            insertarUsuario(user,pass);
+            insertarUsuario(user, pass);
             return 1;
         } catch (Exception e) {
             return 2;
         }
     }
-    
+
     @WebMethod(operationName = "listarFacturasS")
     public ArrayList<Factura> listarFacturasS() {
 
@@ -632,19 +648,17 @@ public class ServicioServer {
         art = listarFactura();
         return art;
     }
-    
-    
+
     @WebMethod(operationName = "actualizarStockArticuloS")
-    public int actualizarStockArticuloS(@WebParam(name = "nomArticulo") String nomArticulo, 
+    public int actualizarStockArticuloS(@WebParam(name = "nomArticulo") String nomArticulo,
             @WebParam(name = "nuevoStock") String nuevoStock) {
         try {
             Conectar();
-            actualizarStockArticulo(nomArticulo,nuevoStock);
+            actualizarStockArticulo(nomArticulo, nuevoStock);
             return 1;
         } catch (Exception e) {
             return 2;
         }
     }
-    
 
 }

@@ -81,7 +81,7 @@ public class ciudad_crud {
     public void insertarCiudad() {
         int resultado;
         try {
-            resultado = port.insertarCiudadS(codigo, nombre);
+            resultado = port.insertarCiudadS(nombre);
             if (resultado == 1) {
                 mensaje = "Se insertó satisfactoriamente";
                 this.listarCiudad();
@@ -133,6 +133,5 @@ public class ciudad_crud {
     public void buscarCiudad() {
         ciudad = port.buscarCiudadS(codigo);
         nombre = ciudad.getNombreCiudad();
-
     }
 }
