@@ -68,10 +68,15 @@ import static prj_grupo3_server.Conexion.Conexion.login;
 import static prj_grupo3_server.Conexion.Conexion.singIn;
 import static prj_grupo3_server.Conexion.OracleConection.ConectarO;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.actualizarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.buscarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.eliminarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.insertarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConection.listarClienteOrc;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.DetalleFactura;
@@ -112,9 +117,8 @@ public class ServicioServer {
     public int insertarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente, @WebParam(name = "Nombre_Cliente") String Nombre_Cliente, @WebParam(name = "Direccion_Cliente") String Direccion_Cliente) {
         System.out.println("1");
         try {
-            Conectar();
-            insertarCliente(Ruc_Cliente, Nombre_Cliente, Direccion_Cliente);
-
+            ConectarO();
+            insertarClienteOrc(Ruc_Cliente, Nombre_Cliente, Direccion_Cliente);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -135,9 +139,8 @@ public class ServicioServer {
     @WebMethod(operationName = "actualizarClienteS")
     public int actualizarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente, @WebParam(name = "Nombre_Cliente") String Nombre_Cliente, @WebParam(name = "Direccion_Cliente") String Direccion_Cliente) {
         try {
-            Conectar();
-            actualizarCliente(Ruc_Cliente, Nombre_Cliente, Direccion_Cliente);
-
+            ConectarO();
+            actualizarClienteOrc(Ruc_Cliente, Nombre_Cliente, Direccion_Cliente);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -160,8 +163,8 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarClienteS")
     public int eliminarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente) {
         try {
-            Conectar();
-            eliminarCliente(Ruc_Cliente);
+            ConectarO();
+            eliminarClienteOrc(Ruc_Cliente);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -183,9 +186,13 @@ public class ServicioServer {
     @WebMethod(operationName = "listarClienteS")
     public ArrayList<Cliente> listarClienteS() {
 
-        Conectar();
+        ConectarO();
         ArrayList<Cliente> clientess = new ArrayList<>();
-        clientess = listarCliente();
+        try {
+            clientess = listarClienteOrc();
+        } catch (SQLException ex) {
+            System.out.println(""+ex.getMessage());
+        }
         return clientess;
     }
 
@@ -204,9 +211,13 @@ public class ServicioServer {
 
     @WebMethod(operationName = "buscarClienteS")
     public Cliente buscarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente) {
-        Conectar();
+        ConectarO();
         Cliente cli = new Cliente();
-        cli = buscarCliente(Ruc_Cliente);
+        try {
+            cli = buscarClienteOrc(Ruc_Cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return cli;
     }
 //***********COBRADOR************

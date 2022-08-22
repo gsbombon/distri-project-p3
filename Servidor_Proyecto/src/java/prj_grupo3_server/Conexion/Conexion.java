@@ -54,9 +54,7 @@ public class Conexion {
 
     public static void singIn(String user, String pass) {
         col = db.getCollection("User");
-
         JSONObject persona;
-
         persona = new JSONObject();
         persona.put("User", user);
         persona.put("Pass", pass);
@@ -65,15 +63,12 @@ public class Conexion {
 
     public static void insertarCliente(String ruc, String nombre, String dir) throws JSONException {
         col = db.getCollection("Cliente");
-
         JSONObject persona;
-
         persona = new JSONObject();
         persona.put("Ruc_Cliente", ruc);
         persona.put("Nombre_Cliente", nombre);
         persona.put("Direccion_Cliente", dir);
         col.insert((DBObject) JSON.parse(persona.toString()));
-
     }
 
     public static void actualizarCiudad(String codigo, String nombre) {

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import prj_grupo3_server.Modelo.Ciudad;
+import prj_grupo3_server.Modelo.Cliente;
 
 public class OracleConection {
 
@@ -107,4 +108,83 @@ public class OracleConection {
         }
         return ciudadBuscada;
     }
+
+    //CRUD FOR CLIENTE
+    public static void insertarClienteOrc(String ruc, String nombre, String dir) throws SQLException {
+        String sql = "INSERT INTO cliente(ruc_cli,nom_cli,dir_cli) VALUES (?,?,?)";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, ruc);
+        statement.setString(2, nombre);
+        statement.setString(3, dir);
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Insertado correctamente !");
+        }
+    }
+
+    public static void actualizarClienteOrc(String ruc, String nombre, String dir) throws SQLException {
+        String sql = "UPDATE cliente SET nom_cli=?,dir_cli=? WHERE ruc_cli=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, nombre);
+        statement.setString(2, dir);
+        statement.setString(3, ruc);
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("Actualizado correctamente!");
+        }
+    }
+
+    public static void eliminarClienteOrc(String ruc) throws SQLException {
+        String sql = "DELETE FROM cliente WHERE ruc_cli=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, ruc);
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("Eliminado correctamente !");
+        }
+    }
+    
+    public static ArrayList<Cliente> listarClienteOrc() throws SQLException {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente";
+        Statement statement = con.createStatement();
+        ResultSet result = statement.executeQuery(sql);
+        while (result.next()) {
+            int codigo = result.getInt(1);
+            String ruc = result.getString(2);
+            String nombre = result.getString(3);
+            String direccion = result.getString(4);
+            
+            Cliente cli = new Cliente();
+            
+            cli.setId(codigo);
+            cli.setRuc_Cliente(ruc);
+            cli.setNombre_Cliente(nombre);
+            cli.setDireccion_Cliente(direccion);
+            
+            clientes.add(cli);
+        }
+        return clientes;
+    }
+    
+    public static Cliente buscarClienteOrc(String ruc) throws SQLException {
+        Cliente clienteBuscar = new Cliente();
+        String sql = "SELECT * FROM cliente WHERE ruc_cli=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, ruc);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            int codigoR = result.getInt(1);
+            String rucR = result.getString(2);
+            String nombreR = result.getString(3);
+            String direccionR = result.getString(4);
+            
+            clienteBuscar.setId(codigoR);
+            clienteBuscar.setRuc_Cliente(rucR);
+            clienteBuscar.setNombre_Cliente(nombreR);
+            clienteBuscar.setDireccion_Cliente(direccionR);
+        }
+        return clienteBuscar;
+    }
+
 }
