@@ -8,71 +8,43 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para insertarArticuloS complex type.
+ * <p>Java class for insertarArticuloS complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="insertarArticuloS"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="Codigo_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="Nombre_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="Precio_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="Stock_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * &lt;complexType name="insertarArticuloS">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="Nombre_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Precio_Articulo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Stock_Articulo" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "insertarArticuloS", propOrder = {
-    "codigoArticulo",
     "nombreArticulo",
     "precioArticulo",
     "stockArticulo"
 })
 public class InsertarArticuloS {
 
-    @XmlElement(name = "Codigo_Articulo")
-    protected String codigoArticulo;
     @XmlElement(name = "Nombre_Articulo")
     protected String nombreArticulo;
     @XmlElement(name = "Precio_Articulo")
     protected String precioArticulo;
     @XmlElement(name = "Stock_Articulo")
-    protected String stockArticulo;
+    protected int stockArticulo;
 
     /**
-     * Obtiene el valor de la propiedad codigoArticulo.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCodigoArticulo() {
-        return codigoArticulo;
-    }
-
-    /**
-     * Define el valor de la propiedad codigoArticulo.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCodigoArticulo(String value) {
-        this.codigoArticulo = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad nombreArticulo.
+     * Gets the value of the nombreArticulo property.
      * 
      * @return
      *     possible object is
@@ -84,7 +56,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Define el valor de la propiedad nombreArticulo.
+     * Sets the value of the nombreArticulo property.
      * 
      * @param value
      *     allowed object is
@@ -96,7 +68,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Obtiene el valor de la propiedad precioArticulo.
+     * Gets the value of the precioArticulo property.
      * 
      * @return
      *     possible object is
@@ -108,7 +80,7 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Define el valor de la propiedad precioArticulo.
+     * Sets the value of the precioArticulo property.
      * 
      * @param value
      *     allowed object is
@@ -120,26 +92,18 @@ public class InsertarArticuloS {
     }
 
     /**
-     * Obtiene el valor de la propiedad stockArticulo.
+     * Gets the value of the stockArticulo property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getStockArticulo() {
+    public int getStockArticulo() {
         return stockArticulo;
     }
 
     /**
-     * Define el valor de la propiedad stockArticulo.
+     * Sets the value of the stockArticulo property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setStockArticulo(String value) {
+    public void setStockArticulo(int value) {
         this.stockArticulo = value;
     }
 

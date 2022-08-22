@@ -15,10 +15,10 @@ import prj_grupo3_server.servicios.ServicioWebServidor;
 public class articulo_crud {
     private ServicioWebServidor service = new ServicioWebServidor();
     ServicioServer port = service.getServicioServerPort();
-    public String codigo = "";
+    public int codigo;
     public String nombre = "";
     public String precio = "";
-    public String cantidad = "";
+    public int cantidad;
     public String mensaje = "";
     public ArrayList<Articulo> articulos = (ArrayList<Articulo>) port.listarArticuloS();
     public ArrayList<String> listaNombreArticulo = (ArrayList<String>) this.cmbNombreArticulos();
@@ -46,13 +46,15 @@ public class articulo_crud {
     public articulo_crud() {
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+
+    
 
     public String getNombre() {
         return nombre;
@@ -70,13 +72,15 @@ public class articulo_crud {
         this.precio = precio;
     }
 
-    public String getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    
 
     
     public String getMensaje() {
@@ -93,7 +97,7 @@ public class articulo_crud {
     {
     int resultado;
         try {
-            resultado = port.insertarArticuloS(codigo, nombre, precio, cantidad);
+            resultado = port.insertarArticuloS(nombre, precio, cantidad);
             if (resultado == 1) {
                 mensaje = "Se insertó satisfactoriamente";
                 this.listarArticulo();
@@ -107,10 +111,10 @@ public class articulo_crud {
     }
     
     public void limpiarFormulario(){
-        codigo="";
+        codigo= 0;
         nombre="";
         precio="";
-        cantidad="";
+        cantidad=0;
     }
     
     public void eliminarArticulo()      
@@ -164,13 +168,14 @@ public class articulo_crud {
         articulo = port.buscarArticuloS(codigo);
         nombre = articulo.getNombreArticulo();
         precio =articulo.getPrecioArticulo();
-        cantidad = articulo.getStockArticulo();
+        cantidad = Integer.parseInt(articulo.getStockArticulo());
     }
     public void buscarArticuloN()      
     {
         articulo = port.buscarArticuloSN(nombre);
+        codigo = Integer.parseInt(articulo.getCodigoArticulo());
         nombre = articulo.getNombreArticulo();
         precio =articulo.getPrecioArticulo();
-        cantidad = articulo.getStockArticulo();
+        cantidad = Integer.parseInt(articulo.getStockArticulo());
     }
 }

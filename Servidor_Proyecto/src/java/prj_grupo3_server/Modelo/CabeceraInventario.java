@@ -19,10 +19,43 @@ import javax.persistence.Id;
 public class CabeceraInventario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String numCabecera;
-    private String rucCliente;
-    private String codCiudad;
+    private int numCabecera;
+    private int movimiento;
     private String fecha;
+
+    public CabeceraInventario(int numCabecera, int movimiento, String fecha) {
+        this.numCabecera = numCabecera;
+        this.movimiento = movimiento;
+        this.fecha = fecha;
+    }
+
+    public CabeceraInventario() {
+    }
+    
+    public int getNumCabecera() {
+        return numCabecera;
+    }
+
+    public void setNumCabecera(int numCabecera) {
+        this.numCabecera = numCabecera;
+    }
+
+    public int getMovimiento() {
+        return movimiento;
+    }
+
+    public void setMovimiento(int movimiento) {
+        this.movimiento = movimiento;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
     
     
     
