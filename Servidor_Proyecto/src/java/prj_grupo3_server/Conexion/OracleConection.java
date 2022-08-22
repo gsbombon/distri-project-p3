@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import prj_grupo3_server.Modelo.Ciudad;
 import prj_grupo3_server.Modelo.Cliente;
 
@@ -42,13 +45,13 @@ public class OracleConection {
         statement.setString(1, usuario);
         statement.setString(2, contrasena);
         ResultSet result = statement.executeQuery();
-        
+
         int i = 0;
-        
+
         while (result.next()) {
             i++;
         }
-        
+
         if (i > 0) {
             return 1;
         } else {
@@ -66,7 +69,7 @@ public class OracleConection {
             System.out.println("Insertado correctamente !");
         }
     }
-    
+
     //CRUD FOR CIUDAD
     public static void insertarCiudadOrc(String nombre) throws SQLException {
         String sql = "INSERT INTO ciudad(nombre_ciu) VALUES (?)";
@@ -170,7 +173,7 @@ public class OracleConection {
             System.out.println("Eliminado correctamente !");
         }
     }
-    
+
     public static ArrayList<Cliente> listarClienteOrc() throws SQLException {
         ArrayList<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
@@ -181,19 +184,19 @@ public class OracleConection {
             String ruc = result.getString(2);
             String nombre = result.getString(3);
             String direccion = result.getString(4);
-            
+
             Cliente cli = new Cliente();
-            
+
             cli.setId(codigo);
             cli.setRuc_Cliente(ruc);
             cli.setNombre_Cliente(nombre);
             cli.setDireccion_Cliente(direccion);
-            
+
             clientes.add(cli);
         }
         return clientes;
     }
-    
+
     public static Cliente buscarClienteOrc(String ruc) throws SQLException {
         Cliente clienteBuscar = new Cliente();
         String sql = "SELECT * FROM cliente WHERE ruc_cli=?";
@@ -205,7 +208,7 @@ public class OracleConection {
             String rucR = result.getString(2);
             String nombreR = result.getString(3);
             String direccionR = result.getString(4);
-            
+
             clienteBuscar.setId(codigoR);
             clienteBuscar.setRuc_Cliente(rucR);
             clienteBuscar.setNombre_Cliente(nombreR);
@@ -214,4 +217,76 @@ public class OracleConection {
         return clienteBuscar;
     }
 
+    // FACTURACION
+    public static void crearCabeceraFacturaOrc(String rucCliente, String nomCiudad, String fechaS) throws SQLException, ParseException {
+        int codCiudad = codigoCiudad(nomCiudad);
+        int codCliente = codigoCliente(rucCliente);
+        Date fecha = stringToDate(fechaS);
+        String valor = "0";
+        String sql = "INSERT INTO cabecera_factura(codigo_cli,codigo_ciu,fecha_cabecera_factu,valor_cabecera_facu) VALUES (?,?,?,?)";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, codCliente);
+        statement.setInt(2, codCiudad);
+        statement.setDate(3, (java.sql.Date) fecha);
+        statement.setString(4, valor);
+        
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+            System.out.println("Insertado correctamente !");
+        }
+    }
+    
+    public static void actualizarCabeceraFacturaOrc(String numCabecera, String rucCliente, String nomCiudad, String fecha) throws SQLException, ParseException{
+        int idCabecera = Integer.parseInt(numCabecera);
+        int codCliente = codigoCliente(rucCliente);
+        int codCiudad = codigoCiudad(nomCiudad);
+        Date fechaR = stringToDate(fecha);
+        String valor = "0";
+        String sql = "UPDATE cabecera_factura SET codigo_cli=?,codigo_ciu=?,fecha_cabecera_factu=?,valor_cabecera_facu=? WHERE =?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, codCliente);
+        statement.setInt(2, codCiudad);
+        statement.setDate(3, (java.sql.Date) fechaR);
+        statement.setString(4, valor);
+        statement.setInt(5, idCabecera);
+        
+        int rowsUpdated = statement.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("Actualizado correctamente!");
+        }
+    }
+    
+    
+    //METODOS NO CONTABLES
+    
+    public static Date stringToDate(String fecha) throws ParseException{
+        Date fechaD=new SimpleDateFormat("dd/MM/yyyy").parse(fecha);  
+        return fechaD;
+    }
+    
+    public static int codigoCiudad(String nombreCiudad) throws SQLException{
+        int codigo=0;
+        String sql = "SELECT codigo_ciu FROM ciudad WHERE nombre_ciu=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, nombreCiudad);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            codigo = result.getInt(1);
+        }
+        return codigo;
+    }
+    
+    public static int codigoCliente(String rucCliente) throws SQLException{
+        int codigo=0;
+        String sql = "SELECT codigo_cli FROM cliente WHERE ruc_cli=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setString(1, rucCliente);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            codigo = result.getInt(1);
+        }
+        return codigo;
+    }
+    
+    
 }

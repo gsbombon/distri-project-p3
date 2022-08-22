@@ -67,10 +67,12 @@ import static prj_grupo3_server.Conexion.Conexion.listarMovimiento;
 import static prj_grupo3_server.Conexion.Conexion.login;
 import static prj_grupo3_server.Conexion.Conexion.singIn;
 import static prj_grupo3_server.Conexion.OracleConection.ConectarO;
+import static prj_grupo3_server.Conexion.OracleConection.actualizarCabeceraFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConection.crearCabeceraFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarCiudadOrc;
@@ -466,13 +468,11 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "crearCabeceraFacturaS")
-    public int crearCabeceraFacturaS(@WebParam(name = "numFactura") String numFactura,
-            @WebParam(name = "rucCliente") String rucCliente,
+    public int crearCabeceraFacturaS(@WebParam(name = "rucCliente") String rucCliente,
             @WebParam(name = "fecha") String fecha, @WebParam(name = "codCiudad") String codCiudad) {
         try {
-            Conectar();
-            crearCabeceraFactura(numFactura, rucCliente, codCiudad, fecha);
-            crearDetalleFactura(numFactura);
+            ConectarO();
+            crearCabeceraFacturaOrc(rucCliente, codCiudad, fecha);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -527,8 +527,8 @@ public class ServicioServer {
     public int actualizarCabeceraFacturaS(@WebParam(name = "numFactura") String numFactura, @WebParam(name = "rucCliente") String rucCliente,
             @WebParam(name = "fecha") String fecha, @WebParam(name = "codCiudad") String codCiudad) {
         try {
-            Conectar();
-            actualizarCabeceraFactura(numFactura, rucCliente, codCiudad, fecha);
+            ConectarO();
+            actualizarCabeceraFacturaOrc(numFactura, rucCliente, codCiudad, fecha);
             return 1;
         } catch (Exception e) {
             return 2;

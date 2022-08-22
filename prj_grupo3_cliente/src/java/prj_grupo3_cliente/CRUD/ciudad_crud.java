@@ -9,7 +9,7 @@ import prj_grupo3_server.servicios.ServicioServer;
 
 @ManagedBean()
 @SessionScoped
-
+ 
 public class ciudad_crud {
 
     private ServicioWebServidor service = new ServicioWebServidor();
