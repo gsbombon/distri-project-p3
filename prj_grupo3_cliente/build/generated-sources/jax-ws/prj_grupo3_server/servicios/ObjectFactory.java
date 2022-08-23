@@ -28,8 +28,8 @@ public class ObjectFactory {
     private final static QName _SingInResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "SingInResponse");
     private final static QName _ActualizarArticuloS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarArticuloS");
     private final static QName _ActualizarArticuloSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarArticuloSResponse");
-    private final static QName _ActualizarCabeceraFacturaS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarCabeceraFacturaS");
-    private final static QName _ActualizarCabeceraFacturaSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarCabeceraFacturaSResponse");
+    private final static QName _ActualizarCabeceraFacturaOrcS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarCabeceraFacturaOrcS");
+    private final static QName _ActualizarCabeceraFacturaOrcSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarCabeceraFacturaOrcSResponse");
     private final static QName _ActualizarCiudadS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarCiudadS");
     private final static QName _ActualizarCiudadSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarCiudadSResponse");
     private final static QName _ActualizarClienteS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarClienteS");
@@ -171,19 +171,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ActualizarCabeceraFacturaS }
+     * Create an instance of {@link ActualizarCabeceraFacturaOrcS }
      * 
      */
-    public ActualizarCabeceraFacturaS createActualizarCabeceraFacturaS() {
-        return new ActualizarCabeceraFacturaS();
+    public ActualizarCabeceraFacturaOrcS createActualizarCabeceraFacturaOrcS() {
+        return new ActualizarCabeceraFacturaOrcS();
     }
 
     /**
-     * Create an instance of {@link ActualizarCabeceraFacturaSResponse }
+     * Create an instance of {@link ActualizarCabeceraFacturaOrcSResponse }
      * 
      */
-    public ActualizarCabeceraFacturaSResponse createActualizarCabeceraFacturaSResponse() {
-        return new ActualizarCabeceraFacturaSResponse();
+    public ActualizarCabeceraFacturaOrcSResponse createActualizarCabeceraFacturaOrcSResponse() {
+        return new ActualizarCabeceraFacturaOrcSResponse();
     }
 
     /**
@@ -1135,29 +1135,29 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaS }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaOrcS }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaS }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaOrcS }{@code >}
      */
-    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "actualizarCabeceraFacturaS")
-    public JAXBElement<ActualizarCabeceraFacturaS> createActualizarCabeceraFacturaS(ActualizarCabeceraFacturaS value) {
-        return new JAXBElement<ActualizarCabeceraFacturaS>(_ActualizarCabeceraFacturaS_QNAME, ActualizarCabeceraFacturaS.class, null, value);
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "actualizarCabeceraFacturaOrcS")
+    public JAXBElement<ActualizarCabeceraFacturaOrcS> createActualizarCabeceraFacturaOrcS(ActualizarCabeceraFacturaOrcS value) {
+        return new JAXBElement<ActualizarCabeceraFacturaOrcS>(_ActualizarCabeceraFacturaOrcS_QNAME, ActualizarCabeceraFacturaOrcS.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaSResponse }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaOrcSResponse }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaSResponse }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ActualizarCabeceraFacturaOrcSResponse }{@code >}
      */
-    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "actualizarCabeceraFacturaSResponse")
-    public JAXBElement<ActualizarCabeceraFacturaSResponse> createActualizarCabeceraFacturaSResponse(ActualizarCabeceraFacturaSResponse value) {
-        return new JAXBElement<ActualizarCabeceraFacturaSResponse>(_ActualizarCabeceraFacturaSResponse_QNAME, ActualizarCabeceraFacturaSResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "actualizarCabeceraFacturaOrcSResponse")
+    public JAXBElement<ActualizarCabeceraFacturaOrcSResponse> createActualizarCabeceraFacturaOrcSResponse(ActualizarCabeceraFacturaOrcSResponse value) {
+        return new JAXBElement<ActualizarCabeceraFacturaOrcSResponse>(_ActualizarCabeceraFacturaOrcSResponse_QNAME, ActualizarCabeceraFacturaOrcSResponse.class, null, value);
     }
 
     /**

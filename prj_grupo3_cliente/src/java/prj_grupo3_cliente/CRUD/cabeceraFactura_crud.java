@@ -11,7 +11,7 @@ import prj_grupo3_server.servicios.DetalleFactura;
 import prj_grupo3_server.servicios.ItemFactura;
 import prj_grupo3_server.servicios.ServicioWebServidor;
 import prj_grupo3_server.servicios.ServicioServer;
- 
+
 @ManagedBean()
 @SessionScoped
 public class cabeceraFactura_crud {
@@ -22,9 +22,12 @@ public class cabeceraFactura_crud {
     public String rucCliente = "";
     public String cfCiudad = "";
     public String fecha = "";
+    public String precioTotal = "0.0";
+
     public String mensajeItem = "Esperando...";
     public String mensajeCabecera = "";
     public String mensajeFactura = "";
+
     public CabeceraFactura cabeceraFactura;
     public DetalleFactura detalleFactura;
     public detalleFactura_crud df_crud = new detalleFactura_crud();
@@ -107,7 +110,7 @@ public class cabeceraFactura_crud {
         try {
             port.actualizarStockArticuloS(nombreItem, this.nuevaCantidadItem());
         } catch (Exception ex) {
-            System.out.println("Error: "+ex.getMessage());
+            System.out.println("Error: " + ex.getMessage());
         }
     }
 
@@ -211,7 +214,7 @@ public class cabeceraFactura_crud {
     public void actualizarCabeceraFactura() {
         int resultado;
         try {
-            resultado = port.actualizarCabeceraFacturaS(numCabecera, rucCliente, fecha, cfCiudad);
+            resultado = port.actualizarCabeceraFacturaOrcS(numCabecera, rucCliente, fecha, cfCiudad);
             if (resultado == 1) {
                 this.limpiarForm();
                 mensajeCabecera = "Se actualizo satisfactoriamente";
@@ -224,10 +227,14 @@ public class cabeceraFactura_crud {
     }
 
     public void buscarCabeceraFactura() {
-        cabeceraFactura = port.buscarCabeceraFacturaS(numCabecera);
+        cabeceraFactura = port.buscarCabeceraFacturaPorRucS(rucCliente);
+        numCabecera = cabeceraFactura.getNumCabecera();
         rucCliente = cabeceraFactura.getRucCliente();
         cfCiudad = cabeceraFactura.getCodCiudad();
         fecha = cabeceraFactura.getFecha();
+        precioTotal = cabeceraFactura.getPrecioTotal();
+
+        /*
         try {
             this.buscarDetalleFactura(numCabecera);
             mensajeCabecera = " Factura Cargada";
@@ -235,6 +242,7 @@ public class cabeceraFactura_crud {
             mensajeCabecera = " No se encontro factura";
             System.out.println("ERROR NULL");
         }
+         */
     }
 
     public void buscarDetalleFactura(String numFactura) {
@@ -250,6 +258,14 @@ public class cabeceraFactura_crud {
             sum += Double.parseDouble(i.getPrecioTotalItem());
         }
         return sum;
+    }
+
+    public String getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(String precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
     public ciudad_crud getCiu_crud() {

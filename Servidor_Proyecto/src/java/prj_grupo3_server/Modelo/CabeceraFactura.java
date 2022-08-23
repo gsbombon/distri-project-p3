@@ -17,6 +17,16 @@ public class CabeceraFactura implements Serializable {
     private String rucCliente;
     private String codCiudad;
     private String fecha;
+    private String precioTotal;
+
+    public String getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(String precioTotal) {
+        this.precioTotal = precioTotal;
+    }
+    
 
     public CabeceraFactura() {
     }

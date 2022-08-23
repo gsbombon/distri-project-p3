@@ -24,67 +24,54 @@ import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import static prj_grupo3_server.Conexion.Conexion.actualizarArticulo;
-import static prj_grupo3_server.Conexion.Conexion.actualizarCabeceraFactura;
-import static prj_grupo3_server.Conexion.Conexion.actualizarMovimiento;
 import static prj_grupo3_server.Conexion.Conexion.actualizarStockArticulo;
 import static prj_grupo3_server.Conexion.Conexion.agregarPaga;
 import static prj_grupo3_server.Conexion.Conexion.agregarProducto;
-import static prj_grupo3_server.Conexion.Conexion.buscarArticulo;
-import static prj_grupo3_server.Conexion.Conexion.buscarArticuloN;
 import static prj_grupo3_server.Conexion.Conexion.buscarCabeceraFactura;
 import static prj_grupo3_server.Conexion.Conexion.buscarCabeceraFacturaPorRuc;
 import static prj_grupo3_server.Conexion.Conexion.buscarDetalleFactura;
 import static prj_grupo3_server.Conexion.Conexion.buscarDetalleFacturacxc;
 import static prj_grupo3_server.Conexion.Conexion.buscarFactura;
-import static prj_grupo3_server.Conexion.Conexion.buscarMovimiento;
-import static prj_grupo3_server.Conexion.Conexion.buscarMovimientoN;
-import static prj_grupo3_server.Conexion.Conexion.crearCabeceraFactura;
 import static prj_grupo3_server.Conexion.Conexion.crearDetalleFactura;
 import static prj_grupo3_server.Conexion.Conexion.crearDetalleFacturacxc;
 import static prj_grupo3_server.Conexion.Conexion.crearFactura;
-import static prj_grupo3_server.Conexion.Conexion.eliminarArticulo;
 import static prj_grupo3_server.Conexion.Conexion.eliminarCabeceraFactura;
 import static prj_grupo3_server.Conexion.Conexion.eliminarDetalleFactura;
 import static prj_grupo3_server.Conexion.Conexion.eliminarDetalleFacturacxc;
 import static prj_grupo3_server.Conexion.Conexion.eliminarFactura;
-import static prj_grupo3_server.Conexion.Conexion.eliminarMovimiento;
-import static prj_grupo3_server.Conexion.Conexion.insertarArticulo;
-import static prj_grupo3_server.Conexion.Conexion.insertarMovimiento;
-import static prj_grupo3_server.Conexion.Conexion.insertarUsuario;
-import static prj_grupo3_server.Conexion.Conexion.listarArticulo;
 import static prj_grupo3_server.Conexion.Conexion.listarFactura;
-import static prj_grupo3_server.Conexion.Conexion.listarMovimiento;
-import static prj_grupo3_server.Conexion.Conexion.login;
 import static prj_grupo3_server.Conexion.Conexion.singIn;
 import static prj_grupo3_server.Conexion.OracleConection.ConectarO;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarArticuloOrc;
-import static prj_grupo3_server.Conexion.OracleConection.actualizarCabeceraFacturaOrc;
-import static prj_grupo3_server.Conexion.OracleConection.actualizarCiudadOrc;
-import static prj_grupo3_server.Conexion.OracleConection.actualizarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.actualizarMovimientoOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarArticuloNOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarArticuloOrc;
-import static prj_grupo3_server.Conexion.OracleConection.buscarCiudadOrc;
-import static prj_grupo3_server.Conexion.OracleConection.buscarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarMovimientoNOrc;
 import static prj_grupo3_server.Conexion.OracleConection.buscarMovimientoOrc;
-import static prj_grupo3_server.Conexion.OracleConection.crearCabeceraFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConection.crearCabeceraInventarioOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarArticuloOrc;
-import static prj_grupo3_server.Conexion.OracleConection.eliminarCiudadOrc;
-import static prj_grupo3_server.Conexion.OracleConection.eliminarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.eliminarMovimientoOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarArticuloOrc;
-import static prj_grupo3_server.Conexion.OracleConection.insertarCiudadOrc;
-import static prj_grupo3_server.Conexion.OracleConection.insertarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarMovimientoOrc;
 import static prj_grupo3_server.Conexion.OracleConection.insertarUsuarioOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarArticuloOrc;
-import static prj_grupo3_server.Conexion.OracleConection.listarCiudadOrc;
-import static prj_grupo3_server.Conexion.OracleConection.listarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConection.listarMovimientoOrc;
 import static prj_grupo3_server.Conexion.OracleConection.loginOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.ConectarOF;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.actualizarCabeceraFacturaOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.actualizarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.actualizarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.agregarArticuloFacturaOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCabeceraFacturaPorRucOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.crearCabeceraFacturaOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.insertarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.insertarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarCiudadOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarClienteOrc;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.DetalleFactura;
@@ -112,7 +99,7 @@ public class ServicioServer {
     @WebMethod(operationName = "insertarCiudadS")
     public int insertarCiudadS(@WebParam(name = "Nombre_Ciudad") String Nombre_Ciudad) {
         try {
-            ConectarO();
+            ConectarOF();
             insertarCiudadOrc(Nombre_Ciudad);
             return 1;
         } catch (Exception e) {
@@ -125,7 +112,7 @@ public class ServicioServer {
     public int insertarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente, @WebParam(name = "Nombre_Cliente") String Nombre_Cliente, @WebParam(name = "Direccion_Cliente") String Direccion_Cliente) {
         System.out.println("1");
         try {
-            ConectarO();
+            ConectarOF();
             insertarClienteOrc(Ruc_Cliente, Nombre_Cliente, Direccion_Cliente);
             return 1;
         } catch (Exception e) {
@@ -136,7 +123,7 @@ public class ServicioServer {
     @WebMethod(operationName = "actualizarCiudadS")
     public int actualizarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad, @WebParam(name = "Nombre_Ciudad") String Nombre_Ciudad) {
         try {
-            ConectarO();
+            ConectarOF();
             actualizarCiudadOrc(Codigo_Ciudad, Nombre_Ciudad);
             return 1;
         } catch (Exception e) {
@@ -147,7 +134,7 @@ public class ServicioServer {
     @WebMethod(operationName = "actualizarClienteS")
     public int actualizarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente, @WebParam(name = "Nombre_Cliente") String Nombre_Cliente, @WebParam(name = "Direccion_Cliente") String Direccion_Cliente) {
         try {
-            ConectarO();
+            ConectarOF();
             actualizarClienteOrc(Ruc_Cliente, Nombre_Cliente, Direccion_Cliente);
             return 1;
         } catch (Exception e) {
@@ -158,7 +145,7 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarCiudadS")
     public int eliminarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad) {
         try {
-            ConectarO();
+            ConectarOF();
             int cod = Integer.parseInt(Codigo_Ciudad);
             eliminarCiudadOrc(cod);
             return 1;
@@ -171,7 +158,7 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarClienteS")
     public int eliminarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente) {
         try {
-            ConectarO();
+            ConectarOF();
             eliminarClienteOrc(Ruc_Cliente);
             return 1;
         } catch (Exception e) {
@@ -183,7 +170,7 @@ public class ServicioServer {
     public ArrayList<Ciudad> listarCiudadS() {
         ArrayList<Ciudad> ciudades = new ArrayList<>();
         try {
-            ConectarO();
+            ConectarOF();
             ciudades = listarCiudadOrc();
         } catch (SQLException ex) {
             System.out.println("" + ex.getMessage());
@@ -194,7 +181,7 @@ public class ServicioServer {
     @WebMethod(operationName = "listarClienteS")
     public ArrayList<Cliente> listarClienteS() {
 
-        ConectarO();
+        ConectarOF();
         ArrayList<Cliente> clientess = new ArrayList<>();
         try {
             clientess = listarClienteOrc();
@@ -206,7 +193,7 @@ public class ServicioServer {
 
     @WebMethod(operationName = "buscarCiudadS")
     public Ciudad buscarCiudadS(@WebParam(name = "Codigo_Ciudad") String Codigo_Ciudad) {
-        ConectarO();
+        ConectarOF();
         Ciudad ciudadB = new Ciudad();
         try {
             int cod_ciu = Integer.parseInt(Codigo_Ciudad);
@@ -219,7 +206,7 @@ public class ServicioServer {
 
     @WebMethod(operationName = "buscarClienteS")
     public Cliente buscarClienteS(@WebParam(name = "Ruc_Cliente") String Ruc_Cliente) {
-        ConectarO();
+        ConectarOF();
         Cliente cli = new Cliente();
         try {
             cli = buscarClienteOrc(Ruc_Cliente);
@@ -345,13 +332,16 @@ public class ServicioServer {
 
     /*----------CRUD ARTICULOS------------*/
     @WebMethod(operationName = "insertarArticuloS")
-    public int insertarArticuloS(@WebParam(name = "Nombre_Articulo") String nombre, @WebParam(name = "Precio_Articulo") String precio, @WebParam(name = "Stock_Articulo") int cantidad) {
+    public int insertarArticuloS(@WebParam(name = "Nombre_Articulo") String nombre,
+            @WebParam(name = "Precio_Articulo") String precio,
+            @WebParam(name = "Stock_Articulo") int cantidad) {
         System.out.println("1");
         try {
             ConectarO();
             insertarArticuloOrc(nombre, precio, cantidad);
             return 1;
         } catch (Exception e) {
+            System.out.println("" + e.getMessage());
             return 2;
         }
     }
@@ -383,10 +373,10 @@ public class ServicioServer {
 
         ConectarO();
         ArrayList<Articulo> art = new ArrayList<>();
-         try {
+        try {
             art = listarArticuloOrc();
         } catch (SQLException ex) {
-            System.out.println(""+ex.getMessage());
+            System.out.println("" + ex.getMessage());
         }
         return art;
     }
@@ -419,11 +409,11 @@ public class ServicioServer {
 
     /*----------CRUD TIPO MOVIMIENTO------------*/
     @WebMethod(operationName = "insertarMovimientoS")
-    public int insertarMovimientoS( @WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
+    public int insertarMovimientoS(@WebParam(name = "nombre") String nombre, @WebParam(name = "signo") String signo) {
         System.out.println("1");
         try {
             ConectarO();
-            insertarMovimientoOrc( nombre, signo);
+            insertarMovimientoOrc(nombre, signo);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -460,7 +450,7 @@ public class ServicioServer {
         try {
             mov = listarMovimientoOrc();
         } catch (SQLException ex) {
-            System.out.println(""+ex.getMessage());
+            System.out.println("" + ex.getMessage());
         }
         return mov;
     }
@@ -490,10 +480,10 @@ public class ServicioServer {
         }
         return mov;
     }
-    
+
     @WebMethod(operationName = "crearCabeceraInventarioS")
     public int crearCabeceraInventarioS(@WebParam(name = "codigo_tmov") int movimiento,
-            @WebParam(name = "fecha") String fecha){
+            @WebParam(name = "fecha") String fecha) {
         try {
             ConectarO();
             crearCabeceraInventarioOrc(movimiento, fecha);
@@ -507,10 +497,11 @@ public class ServicioServer {
     public int crearCabeceraFacturaS(@WebParam(name = "rucCliente") String rucCliente,
             @WebParam(name = "fecha") String fecha, @WebParam(name = "codCiudad") String codCiudad) {
         try {
-            ConectarO();
+            ConectarOF();
             crearCabeceraFacturaOrc(rucCliente, codCiudad, fecha);
             return 1;
         } catch (Exception e) {
+            System.out.println("" + e.getMessage());
             return 2;
         }
     }
@@ -559,14 +550,15 @@ public class ServicioServer {
         }
     }
 
-    @WebMethod(operationName = "actualizarCabeceraFacturaS")
-    public int actualizarCabeceraFacturaS(@WebParam(name = "numFactura") String numFactura, @WebParam(name = "rucCliente") String rucCliente,
+    @WebMethod(operationName = "actualizarCabeceraFacturaOrcS")
+    public int actualizarCabeceraFacturaOrcS(@WebParam(name = "numFactura") String numFactura, @WebParam(name = "rucCliente") String rucCliente,
             @WebParam(name = "fecha") String fecha, @WebParam(name = "codCiudad") String codCiudad) {
         try {
-            ConectarO();
+            ConectarOF();
             actualizarCabeceraFacturaOrc(numFactura, rucCliente, codCiudad, fecha);
             return 1;
         } catch (Exception e) {
+            System.out.println("" + e.getMessage());
             return 2;
         }
     }
@@ -586,7 +578,7 @@ public class ServicioServer {
 
     @WebMethod(operationName = "buscarCabeceraFacturaS")
     public CabeceraFactura buscarCabeceraFacturaS(@WebParam(name = "numCabecera") String numCabecera) {
-        Conectar();
+        ConectarOF();
         CabeceraFactura cf = new CabeceraFactura();
         cf = buscarCabeceraFactura(numCabecera);
         return cf;
@@ -602,9 +594,13 @@ public class ServicioServer {
 
     @WebMethod(operationName = "buscarCabeceraFacturaPorRucS")
     public CabeceraFactura buscarCabeceraFacturaPorRucS(@WebParam(name = "rucCliente") String rucCliente) {
-        Conectar();
+        ConectarOF();
         CabeceraFactura cf = new CabeceraFactura();
-        cf = buscarCabeceraFacturaPorRuc(rucCliente);
+        try {
+            cf = buscarCabeceraFacturaPorRucOrc(rucCliente);
+        } catch (SQLException ex) {
+            System.out.println("" + ex.getMessage());
+        }
         return cf;
     }
 
@@ -653,6 +649,19 @@ public class ServicioServer {
             return 2;
         }
     }
+    
+    @WebMethod(operationName = "agregarArticuloFacturaOrcS")
+    public int agregarArticuloFacturaOrcS(@WebParam(name = "numFactura") String numFactura,
+            @WebParam(name = "nombreItem") String nombreItem,
+            @WebParam(name = "cantidadItem") String cantidadItem) {
+        try {
+            ConectarOF();
+            agregarArticuloFacturaOrc(numFactura,nombreItem,cantidadItem); 
+            return 1;
+        } catch (Exception e) {
+            return 2;
+        }
+    }
 
     @WebMethod(operationName = "agregarPagaS")
     public int agregarPagaS(@WebParam(name = "numFactura") String numFactura,
@@ -695,7 +704,6 @@ public class ServicioServer {
 
     @WebMethod(operationName = "listarFacturasS")
     public ArrayList<Factura> listarFacturasS() {
-
         Conectar();
         ArrayList<Factura> art = new ArrayList<>();
         art = listarFactura();

@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para actualizarCabeceraFacturaS complex type.
+ * <p>Clase Java para actualizarCabeceraFacturaOrcS complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="actualizarCabeceraFacturaS"&gt;
+ * &lt;complexType name="actualizarCabeceraFacturaOrcS"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "actualizarCabeceraFacturaS", propOrder = {
+@XmlType(name = "actualizarCabeceraFacturaOrcS", propOrder = {
     "numFactura",
     "rucCliente",
     "fecha",
     "codCiudad"
 })
-public class ActualizarCabeceraFacturaS {
+public class ActualizarCabeceraFacturaOrcS {
 
     protected String numFactura;
     protected String rucCliente;

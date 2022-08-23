@@ -797,21 +797,6 @@ public class Conexion {
     }
 
     // AGREGAR PRODUCTO AL DETALLE
-    public static void agregarProducto2(String numCabecera, ItemFactura item) {
-        col = db.getCollection("DetalleFactura");
-
-        BasicDBObject query = new BasicDBObject();
-        query.put("Numero_Cabecera", numCabecera);
-
-        BasicDBObject newItem = new BasicDBObject();
-        newItem.put("Items_Detalle", item);
-
-        BasicDBObject updateObject = new BasicDBObject();
-        updateObject.put("$set", newItem);
-        db.getCollection("DetalleFactura").update(query, updateObject);
-    }
-
-    // AGREGAR PRODUCTO AL DETALLE
     public static void agregarProducto(String numCabecera, ItemFactura item) {
         col = db.getCollection("DetalleFactura");
         BasicDBObject match = new BasicDBObject();
