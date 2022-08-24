@@ -13,6 +13,8 @@ import java.util.Date;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.Ciudad;
 import prj_grupo3_server.Modelo.Cliente;
+import prj_grupo3_server.Modelo.DetalleFactura;
+import prj_grupo3_server.Modelo.ItemFactura;
 
 public class OracleConectionFacturacion {
 
@@ -259,14 +261,13 @@ public class OracleConectionFacturacion {
         }
     }
 
-    public static void agregarArticuloFacturaOrc(String numCabecera, String nomArticulo,
-            String cantidad) throws SQLException {
+    public static void agregarArticuloFacturaOrc(String numCabecera, String nomArticulo, String cantidad) throws SQLException {
         int idCabecera = Integer.parseInt(numCabecera);
         int codArt = codigoArticulo(nomArticulo);
         int cant = Integer.parseInt(cantidad);
-        double precioTotal = precioArticulo(nomArticulo)*cant;
+        double precioTotal = precioArticulo(nomArticulo) * cant;
         String pTotal = String.valueOf(precioTotal);
-        
+
         String sql = "INSERT INTO dc_factura(NUMERO_CABECERA_FACT_CXC,CODIGO_ART,CANTIDAD_DC_FACTURA,PRECIO_DC_FACTURA) VALUES (?,?,?,?)";
         PreparedStatement statement = con.prepareStatement(sql);
         statement.setInt(1, idCabecera);
@@ -279,7 +280,48 @@ public class OracleConectionFacturacion {
         }
     }
 
+    // BUSCAR DETALLE DE LA FACTURA
+    public static DetalleFactura buscarDetalleFacturaOrc(String numFactura) throws SQLException {
+        double precioTotalFactura=0;
+        int codFact = Integer.parseInt(numFactura);
+        DetalleFactura detalleFac = new DetalleFactura();
+        ArrayList<ItemFactura> itemsArray = new ArrayList<>();
+        
+        String sql = "SELECT * FROM dc_factura WHERE numero_cabecera_fact_cxc=?";
+        
+        PreparedStatement statement = con.prepareStatement(sql);
+        
+        statement.setInt(1, codFact);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            int codArticulo = result.getInt("CODIGO_ART");
+            String nomArticulo = nombreArticulo(codArticulo);
+            String precio = String.valueOf(precioArticulo(nomArticulo));
+            String cantArt = result.getString("CANTIDAD_DC_FACTURA");
+            String precioTotalItem = result.getNString("PRECIO_DC_FACTURA");
+            precioTotalFactura +=  Double.parseDouble(precioTotalItem);
+            ItemFactura item = new ItemFactura(nomArticulo, precio, cantArt, precioTotalItem);
+            itemsArray.add(item);
+        }
+        detalleFac.setNumCabecera(numFactura);
+        detalleFac.setItemsDetalle(itemsArray);
+        detalleFac.setPrecioTotal(precioTotalFactura);
+        return detalleFac;
+    }
+
     //METODOS NO CONTABLES
+    public static String nombreArticulo(int codArticulo) throws SQLException {
+        String nombreArt = "";
+        String sql = "SELECT nombre_art FROM articulo WHERE codigo_art=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, codArticulo);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            nombreArt = result.getString(1);
+        }
+        return nombreArt;
+    }
+
     public static double precioArticulo(String nombreArticulo) throws SQLException {
         double precio = 0;
         String precioS = "";

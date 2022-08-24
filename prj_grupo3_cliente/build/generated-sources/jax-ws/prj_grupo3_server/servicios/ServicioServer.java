@@ -27,42 +27,45 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param fecha
-     * @param rucCliente
-     * @param numFactura
-     * @param codCiudad
+     * @param numCabecera
+     * @return
+     *     returns prj_grupo3_server.servicios.DetalleFactura
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarDetalleFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarDetalleFacturaS")
+    @ResponseWrapper(localName = "buscarDetalleFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarDetalleFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarDetalleFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarDetalleFacturaSResponse")
+    public DetalleFactura buscarDetalleFacturaS(
+        @WebParam(name = "numCabecera", targetNamespace = "")
+        String numCabecera);
+
+    /**
+     * 
+     * @param nombreCiudad
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "actualizarCabeceraFacturaOrcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCabeceraFacturaOrcS")
-    @ResponseWrapper(localName = "actualizarCabeceraFacturaOrcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCabeceraFacturaOrcSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCabeceraFacturaOrcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCabeceraFacturaOrcSResponse")
-    public int actualizarCabeceraFacturaOrcS(
-        @WebParam(name = "numFactura", targetNamespace = "")
-        String numFactura,
-        @WebParam(name = "rucCliente", targetNamespace = "")
-        String rucCliente,
-        @WebParam(name = "fecha", targetNamespace = "")
-        String fecha,
-        @WebParam(name = "codCiudad", targetNamespace = "")
-        String codCiudad);
+    @RequestWrapper(localName = "insertarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCiudadS")
+    @ResponseWrapper(localName = "insertarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCiudadSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCiudadSResponse")
+    public int insertarCiudadS(
+        @WebParam(name = "Nombre_Ciudad", targetNamespace = "")
+        String nombreCiudad);
 
     /**
      * 
-     * @param cedulaCobrador
      * @return
-     *     returns prj_grupo3_server.servicios.Cobrador
+     *     returns java.util.List<prj_grupo3_server.servicios.Factura>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCobradorS")
-    @ResponseWrapper(localName = "buscarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCobradorSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCobradorSResponse")
-    public Cobrador buscarCobradorS(
-        @WebParam(name = "Cedula_Cobrador", targetNamespace = "")
-        String cedulaCobrador);
+    @RequestWrapper(localName = "listarFacturasS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFacturasS")
+    @ResponseWrapper(localName = "listarFacturasSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFacturasSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarFacturasSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarFacturasSResponse")
+    public List<Factura> listarFacturasS();
 
     /**
      * 
@@ -93,18 +96,90 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param codigoCiudad
+     * @param codigoArticulo
+     * @return
+     *     returns prj_grupo3_server.servicios.Articulo
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloS")
+    @ResponseWrapper(localName = "buscarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSResponse")
+    public Articulo buscarArticuloS(
+        @WebParam(name = "Codigo_Articulo", targetNamespace = "")
+        int codigoArticulo);
+
+    /**
+     * 
+     * @param numCabecera
+     * @return
+     *     returns prj_grupo3_server.servicios.Factura
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFacturaS")
+    @ResponseWrapper(localName = "buscarFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFacturaSResponse")
+    public Factura buscarFacturaS(
+        @WebParam(name = "numCabecera", targetNamespace = "")
+        String numCabecera);
+
+    /**
+     * 
+     * @param nombreCliente
+     * @param rucCliente
+     * @param direccionCliente
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCiudadS")
-    @ResponseWrapper(localName = "eliminarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCiudadSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCiudadSResponse")
-    public int eliminarCiudadS(
-        @WebParam(name = "Codigo_Ciudad", targetNamespace = "")
-        String codigoCiudad);
+    @RequestWrapper(localName = "insertarClienteS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarClienteS")
+    @ResponseWrapper(localName = "insertarClienteSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarClienteSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarClienteSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarClienteSResponse")
+    public int insertarClienteS(
+        @WebParam(name = "Ruc_Cliente", targetNamespace = "")
+        String rucCliente,
+        @WebParam(name = "Nombre_Cliente", targetNamespace = "")
+        String nombreCliente,
+        @WebParam(name = "Direccion_Cliente", targetNamespace = "")
+        String direccionCliente);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<prj_grupo3_server.servicios.Cobrador>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCobradorS")
+    @ResponseWrapper(localName = "listarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCobradorSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarCobradorSResponse")
+    public List<Cobrador> listarCobradorS();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<prj_grupo3_server.servicios.FormaPago>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFormaPagoS")
+    @ResponseWrapper(localName = "listarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFormaPagoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarFormaPagoSResponse")
+    public List<FormaPago> listarFormaPagoS();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<prj_grupo3_server.servicios.Ciudad>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCiudadS")
+    @ResponseWrapper(localName = "listarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCiudadSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarCiudadSResponse")
+    public List<Ciudad> listarCiudadS();
 
     /**
      * 
@@ -135,18 +210,6 @@ public interface ServicioServer {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<prj_grupo3_server.servicios.FormaPago>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFormaPagoS")
-    @ResponseWrapper(localName = "listarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFormaPagoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarFormaPagoSResponse")
-    public List<FormaPago> listarFormaPagoS();
-
-    /**
-     * 
      * @param pass
      * @param user
      * @return
@@ -165,108 +228,36 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param codigoFP
-     * @return
-     *     returns prj_grupo3_server.servicios.FormaPago
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFormaPagoS")
-    @ResponseWrapper(localName = "buscarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFormaPagoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFormaPagoSResponse")
-    public FormaPago buscarFormaPagoS(
-        @WebParam(name = "Codigo_FP", targetNamespace = "")
-        String codigoFP);
-
-    /**
-     * 
-     * @param pass
-     * @param user
+     * @param usuario
+     * @param contrasena
      * @return
      *     returns int
      */
-    @WebMethod(operationName = "SingIn")
+    @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "SingIn", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.SingIn")
-    @ResponseWrapper(localName = "SingInResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.SingInResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/SingInRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/SingInResponse")
-    public int singIn(
-        @WebParam(name = "user", targetNamespace = "")
-        String user,
-        @WebParam(name = "pass", targetNamespace = "")
-        String pass);
+    @RequestWrapper(localName = "loginS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.LoginS")
+    @ResponseWrapper(localName = "loginSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.LoginSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/loginSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/loginSResponse")
+    public int loginS(
+        @WebParam(name = "Usuario", targetNamespace = "")
+        String usuario,
+        @WebParam(name = "Contrasena", targetNamespace = "")
+        String contrasena);
 
     /**
      * 
+     * @param cedulaCobrador
      * @return
-     *     returns java.util.List<prj_grupo3_server.servicios.Factura>
+     *     returns prj_grupo3_server.servicios.Cobrador
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listarFacturasS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFacturasS")
-    @ResponseWrapper(localName = "listarFacturasSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarFacturasSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarFacturasSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarFacturasSResponse")
-    public List<Factura> listarFacturasS();
-
-    /**
-     * 
-     * @param numCabecera
-     * @return
-     *     returns prj_grupo3_server.servicios.Factura
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFacturaS")
-    @ResponseWrapper(localName = "buscarFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFacturaSResponse")
-    public Factura buscarFacturaS(
-        @WebParam(name = "numCabecera", targetNamespace = "")
-        String numCabecera);
-
-    /**
-     * 
-     * @param rucCliente
-     * @return
-     *     returns prj_grupo3_server.servicios.Cliente
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarClienteS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarClienteS")
-    @ResponseWrapper(localName = "buscarClienteSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarClienteSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarClienteSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarClienteSResponse")
-    public Cliente buscarClienteS(
-        @WebParam(name = "Ruc_Cliente", targetNamespace = "")
-        String rucCliente);
-
-    /**
-     * 
-     * @param codigoCiudad
-     * @return
-     *     returns prj_grupo3_server.servicios.Ciudad
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCiudadS")
-    @ResponseWrapper(localName = "buscarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCiudadSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCiudadSResponse")
-    public Ciudad buscarCiudadS(
-        @WebParam(name = "Codigo_Ciudad", targetNamespace = "")
-        String codigoCiudad);
-
-    /**
-     * 
-     * @param codigoArticulo
-     * @return
-     *     returns prj_grupo3_server.servicios.Articulo
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloS")
-    @ResponseWrapper(localName = "buscarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSResponse")
-    public Articulo buscarArticuloS(
-        @WebParam(name = "Codigo_Articulo", targetNamespace = "")
-        int codigoArticulo);
+    @RequestWrapper(localName = "buscarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCobradorS")
+    @ResponseWrapper(localName = "buscarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCobradorSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCobradorSResponse")
+    public Cobrador buscarCobradorS(
+        @WebParam(name = "Cedula_Cobrador", targetNamespace = "")
+        String cedulaCobrador);
 
     /**
      * 
@@ -279,66 +270,6 @@ public interface ServicioServer {
     @ResponseWrapper(localName = "listarClienteSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarClienteSResponse")
     @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarClienteSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarClienteSResponse")
     public List<Cliente> listarClienteS();
-
-    /**
-     * 
-     * @param nombreCliente
-     * @param rucCliente
-     * @param direccionCliente
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "insertarClienteS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarClienteS")
-    @ResponseWrapper(localName = "insertarClienteSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarClienteSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarClienteSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarClienteSResponse")
-    public int insertarClienteS(
-        @WebParam(name = "Ruc_Cliente", targetNamespace = "")
-        String rucCliente,
-        @WebParam(name = "Nombre_Cliente", targetNamespace = "")
-        String nombreCliente,
-        @WebParam(name = "Direccion_Cliente", targetNamespace = "")
-        String direccionCliente);
-
-    /**
-     * 
-     * @param nombreArticulo
-     * @return
-     *     returns prj_grupo3_server.servicios.Articulo
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarArticuloSN", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloSN")
-    @ResponseWrapper(localName = "buscarArticuloSNResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloSNResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSNRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSNResponse")
-    public Articulo buscarArticuloSN(
-        @WebParam(name = "Nombre_Articulo", targetNamespace = "")
-        String nombreArticulo);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<prj_grupo3_server.servicios.Cobrador>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCobradorS")
-    @ResponseWrapper(localName = "listarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCobradorSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarCobradorSResponse")
-    public List<Cobrador> listarCobradorS();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<prj_grupo3_server.servicios.Articulo>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarArticuloS")
-    @ResponseWrapper(localName = "listarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarArticuloSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarArticuloSResponse")
-    public List<Articulo> listarArticuloS();
 
     /**
      * 
@@ -369,33 +300,48 @@ public interface ServicioServer {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<prj_grupo3_server.servicios.Ciudad>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCiudadS")
-    @ResponseWrapper(localName = "listarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarCiudadSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarCiudadSResponse")
-    public List<Ciudad> listarCiudadS();
-
-    /**
-     * 
-     * @param usuario
-     * @param contrasena
+     * @param codigoCiudad
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "loginS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.LoginS")
-    @ResponseWrapper(localName = "loginSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.LoginSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/loginSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/loginSResponse")
-    public int loginS(
-        @WebParam(name = "Usuario", targetNamespace = "")
-        String usuario,
-        @WebParam(name = "Contrasena", targetNamespace = "")
-        String contrasena);
+    @RequestWrapper(localName = "eliminarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCiudadS")
+    @ResponseWrapper(localName = "eliminarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCiudadSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCiudadSResponse")
+    public int eliminarCiudadS(
+        @WebParam(name = "Codigo_Ciudad", targetNamespace = "")
+        String codigoCiudad);
+
+    /**
+     * 
+     * @param codigoCiudad
+     * @return
+     *     returns prj_grupo3_server.servicios.Ciudad
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCiudadS")
+    @ResponseWrapper(localName = "buscarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCiudadSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCiudadSResponse")
+    public Ciudad buscarCiudadS(
+        @WebParam(name = "Codigo_Ciudad", targetNamespace = "")
+        String codigoCiudad);
+
+    /**
+     * 
+     * @param codigoFP
+     * @return
+     *     returns prj_grupo3_server.servicios.FormaPago
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFormaPagoS")
+    @ResponseWrapper(localName = "buscarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarFormaPagoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarFormaPagoSResponse")
+    public FormaPago buscarFormaPagoS(
+        @WebParam(name = "Codigo_FP", targetNamespace = "")
+        String codigoFP);
 
     /**
      * 
@@ -414,69 +360,63 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param nombreCiudad
+     * @param pass
+     * @param user
      * @return
      *     returns int
      */
-    @WebMethod
+    @WebMethod(operationName = "SingIn")
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "insertarCiudadS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCiudadS")
-    @ResponseWrapper(localName = "insertarCiudadSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCiudadSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCiudadSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCiudadSResponse")
-    public int insertarCiudadS(
-        @WebParam(name = "Nombre_Ciudad", targetNamespace = "")
-        String nombreCiudad);
+    @RequestWrapper(localName = "SingIn", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.SingIn")
+    @ResponseWrapper(localName = "SingInResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.SingInResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/SingInRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/SingInResponse")
+    public int singIn(
+        @WebParam(name = "user", targetNamespace = "")
+        String user,
+        @WebParam(name = "pass", targetNamespace = "")
+        String pass);
 
     /**
      * 
-     * @param codigoFP
-     * @param nombreFP
+     * @param nombreArticulo
      * @return
-     *     returns int
+     *     returns prj_grupo3_server.servicios.Articulo
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "insertarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarFormaPagoS")
-    @ResponseWrapper(localName = "insertarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarFormaPagoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarFormaPagoSResponse")
-    public int insertarFormaPagoS(
-        @WebParam(name = "Codigo_FP", targetNamespace = "")
-        String codigoFP,
-        @WebParam(name = "Nombre_FP", targetNamespace = "")
-        String nombreFP);
+    @RequestWrapper(localName = "buscarArticuloSN", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloSN")
+    @ResponseWrapper(localName = "buscarArticuloSNResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarArticuloSNResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSNRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarArticuloSNResponse")
+    public Articulo buscarArticuloSN(
+        @WebParam(name = "Nombre_Articulo", targetNamespace = "")
+        String nombreArticulo);
 
     /**
      * 
-     * @param numCabecera
      * @return
-     *     returns prj_grupo3_server.servicios.DetalleFactura
+     *     returns java.util.List<prj_grupo3_server.servicios.Articulo>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarDetalleFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarDetalleFacturaS")
-    @ResponseWrapper(localName = "buscarDetalleFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarDetalleFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarDetalleFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarDetalleFacturaSResponse")
-    public DetalleFactura buscarDetalleFacturaS(
-        @WebParam(name = "numCabecera", targetNamespace = "")
-        String numCabecera);
+    @RequestWrapper(localName = "listarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarArticuloS")
+    @ResponseWrapper(localName = "listarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarArticuloSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarArticuloSResponse")
+    public List<Articulo> listarArticuloS();
 
     /**
      * 
-     * @param nuevoStock
-     * @param nomArticulo
+     * @param rucCliente
      * @return
-     *     returns int
+     *     returns prj_grupo3_server.servicios.Cliente
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "actualizarStockArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarStockArticuloS")
-    @ResponseWrapper(localName = "actualizarStockArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarStockArticuloSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarStockArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarStockArticuloSResponse")
-    public int actualizarStockArticuloS(
-        @WebParam(name = "nomArticulo", targetNamespace = "")
-        String nomArticulo,
-        @WebParam(name = "nuevoStock", targetNamespace = "")
-        String nuevoStock);
+    @RequestWrapper(localName = "buscarClienteS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarClienteS")
+    @ResponseWrapper(localName = "buscarClienteSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarClienteSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarClienteSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarClienteSResponse")
+    public Cliente buscarClienteS(
+        @WebParam(name = "Ruc_Cliente", targetNamespace = "")
+        String rucCliente);
 
     /**
      * 
@@ -503,10 +443,10 @@ public interface ServicioServer {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "actualizarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCobradorS")
-    @ResponseWrapper(localName = "actualizarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCobradorSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCobradorSResponse")
-    public int actualizarCobradorS(
+    @RequestWrapper(localName = "insertarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCobradorS")
+    @ResponseWrapper(localName = "insertarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCobradorSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCobradorSResponse")
+    public int insertarCobradorS(
         @WebParam(name = "Cedula_Cobrador", targetNamespace = "")
         String cedulaCobrador,
         @WebParam(name = "Nombre_Cobrador", targetNamespace = "")
@@ -516,33 +456,33 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param numFactura
+     * @param codigoArticulo
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "crearDetalleFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturaS")
-    @ResponseWrapper(localName = "crearDetalleFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturaSResponse")
-    public int crearDetalleFacturaS(
-        @WebParam(name = "numFactura", targetNamespace = "")
-        String numFactura);
+    @RequestWrapper(localName = "eliminarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarArticuloS")
+    @ResponseWrapper(localName = "eliminarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarArticuloSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarArticuloSResponse")
+    public int eliminarArticuloS(
+        @WebParam(name = "Codigo_Articulo", targetNamespace = "")
+        int codigoArticulo);
 
     /**
      * 
-     * @param numCabecera
+     * @param codigo
      * @return
-     *     returns prj_grupo3_server.servicios.CabeceraFactura
+     *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarCabeceraFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaS")
-    @ResponseWrapper(localName = "buscarCabeceraFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaSResponse")
-    public CabeceraFactura buscarCabeceraFacturaS(
-        @WebParam(name = "numCabecera", targetNamespace = "")
-        String numCabecera);
+    @RequestWrapper(localName = "eliminarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarMovimientoS")
+    @ResponseWrapper(localName = "eliminarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarMovimientoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarMovimientoSResponse")
+    public int eliminarMovimientoS(
+        @WebParam(name = "codigo", targetNamespace = "")
+        int codigo);
 
     /**
      * 
@@ -558,6 +498,168 @@ public interface ServicioServer {
     public int eliminarCobradorS(
         @WebParam(name = "Cedula_Cobrador", targetNamespace = "")
         String cedulaCobrador);
+
+    /**
+     * 
+     * @param nuevoStock
+     * @param nomArticulo
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "actualizarStockArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarStockArticuloS")
+    @ResponseWrapper(localName = "actualizarStockArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarStockArticuloSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarStockArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarStockArticuloSResponse")
+    public int actualizarStockArticuloS(
+        @WebParam(name = "nomArticulo", targetNamespace = "")
+        String nomArticulo,
+        @WebParam(name = "nuevoStock", targetNamespace = "")
+        String nuevoStock);
+
+    /**
+     * 
+     * @param direccionCobrador
+     * @param cedulaCobrador
+     * @param nombreCobrador
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "actualizarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCobradorS")
+    @ResponseWrapper(localName = "actualizarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCobradorSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCobradorSResponse")
+    public int actualizarCobradorS(
+        @WebParam(name = "Cedula_Cobrador", targetNamespace = "")
+        String cedulaCobrador,
+        @WebParam(name = "Nombre_Cobrador", targetNamespace = "")
+        String nombreCobrador,
+        @WebParam(name = "Direccion_Cobrador", targetNamespace = "")
+        String direccionCobrador);
+
+    /**
+     * 
+     * @param fecha
+     * @param codigoTmov
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "crearCabeceraInventarioS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraInventarioS")
+    @ResponseWrapper(localName = "crearCabeceraInventarioSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraInventarioSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraInventarioSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraInventarioSResponse")
+    public int crearCabeceraInventarioS(
+        @WebParam(name = "codigo_tmov", targetNamespace = "")
+        int codigoTmov,
+        @WebParam(name = "fecha", targetNamespace = "")
+        String fecha);
+
+    /**
+     * 
+     * @param fecha
+     * @param rucCliente
+     * @param codCiudad
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "crearCabeceraFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraFacturaS")
+    @ResponseWrapper(localName = "crearCabeceraFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraFacturaSResponse")
+    public int crearCabeceraFacturaS(
+        @WebParam(name = "rucCliente", targetNamespace = "")
+        String rucCliente,
+        @WebParam(name = "fecha", targetNamespace = "")
+        String fecha,
+        @WebParam(name = "codCiudad", targetNamespace = "")
+        String codCiudad);
+
+    /**
+     * 
+     * @param rucCliente
+     * @return
+     *     returns prj_grupo3_server.servicios.CabeceraFactura
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarCabeceraFacturaPorRucS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaPorRucS")
+    @ResponseWrapper(localName = "buscarCabeceraFacturaPorRucSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaPorRucSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaPorRucSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaPorRucSResponse")
+    public CabeceraFactura buscarCabeceraFacturaPorRucS(
+        @WebParam(name = "rucCliente", targetNamespace = "")
+        String rucCliente);
+
+    /**
+     * 
+     * @param nombreItem
+     * @param cantidadItem
+     * @param numFactura
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "agregarArticuloFacturaOrcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.AgregarArticuloFacturaOrcS")
+    @ResponseWrapper(localName = "agregarArticuloFacturaOrcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.AgregarArticuloFacturaOrcSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/agregarArticuloFacturaOrcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/agregarArticuloFacturaOrcSResponse")
+    public int agregarArticuloFacturaOrcS(
+        @WebParam(name = "numFactura", targetNamespace = "")
+        String numFactura,
+        @WebParam(name = "nombreItem", targetNamespace = "")
+        String nombreItem,
+        @WebParam(name = "cantidadItem", targetNamespace = "")
+        String cantidadItem);
+
+    /**
+     * 
+     * @param signo
+     * @param nombre
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "insertarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarMovimientoS")
+    @ResponseWrapper(localName = "insertarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarMovimientoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarMovimientoSResponse")
+    public int insertarMovimientoS(
+        @WebParam(name = "nombre", targetNamespace = "")
+        String nombre,
+        @WebParam(name = "signo", targetNamespace = "")
+        String signo);
+
+    /**
+     * 
+     * @param numFactura
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "eliminarDetalleFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturaS")
+    @ResponseWrapper(localName = "eliminarDetalleFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturaSResponse")
+    public int eliminarDetalleFacturaS(
+        @WebParam(name = "numFactura", targetNamespace = "")
+        String numFactura);
+
+    /**
+     * 
+     * @param numFactura
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "crearDetalleFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturaS")
+    @ResponseWrapper(localName = "crearDetalleFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturaSResponse")
+    public int crearDetalleFacturaS(
+        @WebParam(name = "numFactura", targetNamespace = "")
+        String numFactura);
 
     /**
      * 
@@ -579,6 +681,52 @@ public interface ServicioServer {
 
     /**
      * 
+     * @param stockArticulo
+     * @param precioArticulo
+     * @param nombreArticulo
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "insertarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarArticuloS")
+    @ResponseWrapper(localName = "insertarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarArticuloSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarArticuloSResponse")
+    public int insertarArticuloS(
+        @WebParam(name = "Nombre_Articulo", targetNamespace = "")
+        String nombreArticulo,
+        @WebParam(name = "Precio_Articulo", targetNamespace = "")
+        String precioArticulo,
+        @WebParam(name = "Stock_Articulo", targetNamespace = "")
+        int stockArticulo);
+
+    /**
+     * 
+     * @param fecha
+     * @param rucCliente
+     * @param numFactura
+     * @param codCiudad
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "actualizarCabeceraFacturaOrcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCabeceraFacturaOrcS")
+    @ResponseWrapper(localName = "actualizarCabeceraFacturaOrcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarCabeceraFacturaOrcSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCabeceraFacturaOrcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarCabeceraFacturaOrcSResponse")
+    public int actualizarCabeceraFacturaOrcS(
+        @WebParam(name = "numFactura", targetNamespace = "")
+        String numFactura,
+        @WebParam(name = "rucCliente", targetNamespace = "")
+        String rucCliente,
+        @WebParam(name = "fecha", targetNamespace = "")
+        String fecha,
+        @WebParam(name = "codCiudad", targetNamespace = "")
+        String codCiudad);
+
+    /**
+     * 
+     * @param codigo
      * @param signo
      * @param nombre
      * @return
@@ -586,14 +734,43 @@ public interface ServicioServer {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "insertarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarMovimientoS")
-    @ResponseWrapper(localName = "insertarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarMovimientoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarMovimientoSResponse")
-    public int insertarMovimientoS(
+    @RequestWrapper(localName = "actualizarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarMovimientoS")
+    @ResponseWrapper(localName = "actualizarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarMovimientoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarMovimientoSResponse")
+    public int actualizarMovimientoS(
+        @WebParam(name = "codigo", targetNamespace = "")
+        int codigo,
         @WebParam(name = "nombre", targetNamespace = "")
         String nombre,
         @WebParam(name = "signo", targetNamespace = "")
         String signo);
+
+    /**
+     * 
+     * @param numCabecera
+     * @return
+     *     returns prj_grupo3_server.servicios.CabeceraFactura
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarCabeceraFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaS")
+    @ResponseWrapper(localName = "buscarCabeceraFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaSResponse")
+    public CabeceraFactura buscarCabeceraFacturaS(
+        @WebParam(name = "numCabecera", targetNamespace = "")
+        String numCabecera);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<prj_grupo3_server.servicios.Movimiento>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "listarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarMovimientoS")
+    @ResponseWrapper(localName = "listarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarMovimientoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarMovimientoSResponse")
+    public List<Movimiento> listarMovimientoS();
 
     /**
      * 
@@ -621,72 +798,6 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param numFactura
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarDetalleFacturacxcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturacxcS")
-    @ResponseWrapper(localName = "eliminarDetalleFacturacxcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturacxcSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturacxcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturacxcSResponse")
-    public int eliminarDetalleFacturacxcS(
-        @WebParam(name = "numFactura", targetNamespace = "")
-        String numFactura);
-
-    /**
-     * 
-     * @param codigo
-     * @param signo
-     * @param nombre
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "actualizarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarMovimientoS")
-    @ResponseWrapper(localName = "actualizarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ActualizarMovimientoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/actualizarMovimientoSResponse")
-    public int actualizarMovimientoS(
-        @WebParam(name = "codigo", targetNamespace = "")
-        int codigo,
-        @WebParam(name = "nombre", targetNamespace = "")
-        String nombre,
-        @WebParam(name = "signo", targetNamespace = "")
-        String signo);
-
-    /**
-     * 
-     * @param numCabecera
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarCabeceraFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCabeceraFacturaS")
-    @ResponseWrapper(localName = "eliminarCabeceraFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCabeceraFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCabeceraFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCabeceraFacturaSResponse")
-    public int eliminarCabeceraFacturaS(
-        @WebParam(name = "numCabecera", targetNamespace = "")
-        String numCabecera);
-
-    /**
-     * 
-     * @param numFactura
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "crearDetalleFacturacxcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturacxcS")
-    @ResponseWrapper(localName = "crearDetalleFacturacxcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturacxcSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturacxcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturacxcSResponse")
-    public int crearDetalleFacturacxcS(
-        @WebParam(name = "numFactura", targetNamespace = "")
-        String numFactura);
-
-    /**
-     * 
      * @param numCabecera
      * @return
      *     returns prj_grupo3_server.servicios.DetalleFacturacxc
@@ -702,144 +813,21 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param fecha
-     * @param rucCliente
-     * @param codCiudad
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "crearCabeceraFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraFacturaS")
-    @ResponseWrapper(localName = "crearCabeceraFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraFacturaSResponse")
-    public int crearCabeceraFacturaS(
-        @WebParam(name = "rucCliente", targetNamespace = "")
-        String rucCliente,
-        @WebParam(name = "fecha", targetNamespace = "")
-        String fecha,
-        @WebParam(name = "codCiudad", targetNamespace = "")
-        String codCiudad);
-
-    /**
-     * 
-     * @param fecha
-     * @param codigoTmov
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "crearCabeceraInventarioS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraInventarioS")
-    @ResponseWrapper(localName = "crearCabeceraInventarioSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearCabeceraInventarioSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraInventarioSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearCabeceraInventarioSResponse")
-    public int crearCabeceraInventarioS(
-        @WebParam(name = "codigo_tmov", targetNamespace = "")
-        int codigoTmov,
-        @WebParam(name = "fecha", targetNamespace = "")
-        String fecha);
-
-    /**
-     * 
-     * @param stockArticulo
-     * @param precioArticulo
-     * @param nombreArticulo
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "insertarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarArticuloS")
-    @ResponseWrapper(localName = "insertarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarArticuloSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarArticuloSResponse")
-    public int insertarArticuloS(
-        @WebParam(name = "Nombre_Articulo", targetNamespace = "")
-        String nombreArticulo,
-        @WebParam(name = "Precio_Articulo", targetNamespace = "")
-        String precioArticulo,
-        @WebParam(name = "Stock_Articulo", targetNamespace = "")
-        int stockArticulo);
-
-    /**
-     * 
-     * @param rucCliente
-     * @return
-     *     returns prj_grupo3_server.servicios.CabeceraFactura
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarCabeceraFacturaPorRucS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaPorRucS")
-    @ResponseWrapper(localName = "buscarCabeceraFacturaPorRucSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarCabeceraFacturaPorRucSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaPorRucSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarCabeceraFacturaPorRucSResponse")
-    public CabeceraFactura buscarCabeceraFacturaPorRucS(
-        @WebParam(name = "rucCliente", targetNamespace = "")
-        String rucCliente);
-
-    /**
-     * 
-     * @param numFactura
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarDetalleFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturaS")
-    @ResponseWrapper(localName = "eliminarDetalleFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturaSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturaSResponse")
-    public int eliminarDetalleFacturaS(
-        @WebParam(name = "numFactura", targetNamespace = "")
-        String numFactura);
-
-    /**
-     * 
-     * @param direccionCobrador
-     * @param cedulaCobrador
-     * @param nombreCobrador
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "insertarCobradorS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCobradorS")
-    @ResponseWrapper(localName = "insertarCobradorSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarCobradorSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCobradorSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarCobradorSResponse")
-    public int insertarCobradorS(
-        @WebParam(name = "Cedula_Cobrador", targetNamespace = "")
-        String cedulaCobrador,
-        @WebParam(name = "Nombre_Cobrador", targetNamespace = "")
-        String nombreCobrador,
-        @WebParam(name = "Direccion_Cobrador", targetNamespace = "")
-        String direccionCobrador);
-
-    /**
-     * 
-     * @param nombre
-     * @return
-     *     returns prj_grupo3_server.servicios.Movimiento
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "buscarMovimientoSN", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarMovimientoSN")
-    @ResponseWrapper(localName = "buscarMovimientoSNResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarMovimientoSNResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarMovimientoSNRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarMovimientoSNResponse")
-    public Movimiento buscarMovimientoSN(
-        @WebParam(name = "nombre", targetNamespace = "")
-        String nombre);
-
-    /**
-     * 
      * @param codigoFP
+     * @param nombreFP
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarFormaPagoS")
-    @ResponseWrapper(localName = "eliminarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarFormaPagoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarFormaPagoSResponse")
-    public int eliminarFormaPagoS(
+    @RequestWrapper(localName = "insertarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarFormaPagoS")
+    @ResponseWrapper(localName = "insertarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.InsertarFormaPagoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/insertarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/insertarFormaPagoSResponse")
+    public int insertarFormaPagoS(
         @WebParam(name = "Codigo_FP", targetNamespace = "")
-        String codigoFP);
+        String codigoFP,
+        @WebParam(name = "Nombre_FP", targetNamespace = "")
+        String nombreFP);
 
     /**
      * 
@@ -861,18 +849,63 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param codigo
+     * @param nombre
+     * @return
+     *     returns prj_grupo3_server.servicios.Movimiento
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "buscarMovimientoSN", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarMovimientoSN")
+    @ResponseWrapper(localName = "buscarMovimientoSNResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.BuscarMovimientoSNResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/buscarMovimientoSNRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/buscarMovimientoSNResponse")
+    public Movimiento buscarMovimientoSN(
+        @WebParam(name = "nombre", targetNamespace = "")
+        String nombre);
+
+    /**
+     * 
+     * @param numFactura
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarMovimientoS")
-    @ResponseWrapper(localName = "eliminarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarMovimientoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarMovimientoSResponse")
-    public int eliminarMovimientoS(
-        @WebParam(name = "codigo", targetNamespace = "")
-        int codigo);
+    @RequestWrapper(localName = "crearDetalleFacturacxcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturacxcS")
+    @ResponseWrapper(localName = "crearDetalleFacturacxcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CrearDetalleFacturacxcSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturacxcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/crearDetalleFacturacxcSResponse")
+    public int crearDetalleFacturacxcS(
+        @WebParam(name = "numFactura", targetNamespace = "")
+        String numFactura);
+
+    /**
+     * 
+     * @param numCabecera
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "eliminarCabeceraFacturaS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCabeceraFacturaS")
+    @ResponseWrapper(localName = "eliminarCabeceraFacturaSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarCabeceraFacturaSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCabeceraFacturaSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarCabeceraFacturaSResponse")
+    public int eliminarCabeceraFacturaS(
+        @WebParam(name = "numCabecera", targetNamespace = "")
+        String numCabecera);
+
+    /**
+     * 
+     * @param codigoFP
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "eliminarFormaPagoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarFormaPagoS")
+    @ResponseWrapper(localName = "eliminarFormaPagoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarFormaPagoSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarFormaPagoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarFormaPagoSResponse")
+    public int eliminarFormaPagoS(
+        @WebParam(name = "Codigo_FP", targetNamespace = "")
+        String codigoFP);
 
     /**
      * 
@@ -897,29 +930,17 @@ public interface ServicioServer {
 
     /**
      * 
-     * @param codigoArticulo
+     * @param numFactura
      * @return
      *     returns int
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarArticuloS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarArticuloS")
-    @ResponseWrapper(localName = "eliminarArticuloSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarArticuloSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarArticuloSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarArticuloSResponse")
-    public int eliminarArticuloS(
-        @WebParam(name = "Codigo_Articulo", targetNamespace = "")
-        int codigoArticulo);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<prj_grupo3_server.servicios.Movimiento>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "listarMovimientoS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarMovimientoS")
-    @ResponseWrapper(localName = "listarMovimientoSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.ListarMovimientoSResponse")
-    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/listarMovimientoSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/listarMovimientoSResponse")
-    public List<Movimiento> listarMovimientoS();
+    @RequestWrapper(localName = "eliminarDetalleFacturacxcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturacxcS")
+    @ResponseWrapper(localName = "eliminarDetalleFacturacxcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.EliminarDetalleFacturacxcSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturacxcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/eliminarDetalleFacturacxcSResponse")
+    public int eliminarDetalleFacturacxcS(
+        @WebParam(name = "numFactura", targetNamespace = "")
+        String numFactura);
 
 }

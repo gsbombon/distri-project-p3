@@ -606,7 +606,6 @@ public class Conexion {
     public static DetalleFactura buscarDetalleFactura(String numFactura) {
 
         DetalleFactura detalleFac = new DetalleFactura();
-        ItemFactura itFac = new ItemFactura();
         ArrayList<ItemFactura> itemsArray = new ArrayList<>();
         //String items;
         col = db.getCollection("DetalleFactura");
@@ -639,6 +638,8 @@ public class Conexion {
 
         return detalleFac;
     }
+    
+    
     // BUSCAR DETALLE DE LA FACTURA cxc
 
     public static DetalleFacturacxc buscarDetalleFacturacxc(String numFactura) {

@@ -42,6 +42,8 @@ public class ObjectFactory {
     private final static QName _ActualizarMovimientoSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarMovimientoSResponse");
     private final static QName _ActualizarStockArticuloS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarStockArticuloS");
     private final static QName _ActualizarStockArticuloSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "actualizarStockArticuloSResponse");
+    private final static QName _AgregarArticuloFacturaOrcS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "agregarArticuloFacturaOrcS");
+    private final static QName _AgregarArticuloFacturaOrcSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "agregarArticuloFacturaOrcSResponse");
     private final static QName _AgregarPagaS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "agregarPagaS");
     private final static QName _AgregarPagaSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "agregarPagaSResponse");
     private final static QName _AgregarProductoS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "agregarProductoS");
@@ -280,6 +282,22 @@ public class ObjectFactory {
      */
     public ActualizarStockArticuloSResponse createActualizarStockArticuloSResponse() {
         return new ActualizarStockArticuloSResponse();
+    }
+
+    /**
+     * Create an instance of {@link AgregarArticuloFacturaOrcS }
+     * 
+     */
+    public AgregarArticuloFacturaOrcS createAgregarArticuloFacturaOrcS() {
+        return new AgregarArticuloFacturaOrcS();
+    }
+
+    /**
+     * Create an instance of {@link AgregarArticuloFacturaOrcSResponse }
+     * 
+     */
+    public AgregarArticuloFacturaOrcSResponse createAgregarArticuloFacturaOrcSResponse() {
+        return new AgregarArticuloFacturaOrcSResponse();
     }
 
     /**
@@ -1003,22 +1021,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DetalleFactura }
-     * 
-     */
-    public DetalleFactura createDetalleFactura() {
-        return new DetalleFactura();
-    }
-
-    /**
-     * Create an instance of {@link ItemFactura }
-     * 
-     */
-    public ItemFactura createItemFactura() {
-        return new ItemFactura();
-    }
-
-    /**
      * Create an instance of {@link Factura }
      * 
      */
@@ -1056,6 +1058,22 @@ public class ObjectFactory {
      */
     public Movimiento createMovimiento() {
         return new Movimiento();
+    }
+
+    /**
+     * Create an instance of {@link DetalleFactura }
+     * 
+     */
+    public DetalleFactura createDetalleFactura() {
+        return new DetalleFactura();
+    }
+
+    /**
+     * Create an instance of {@link ItemFactura }
+     * 
+     */
+    public ItemFactura createItemFactura() {
+        return new ItemFactura();
     }
 
     /**
@@ -1314,6 +1332,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "actualizarStockArticuloSResponse")
     public JAXBElement<ActualizarStockArticuloSResponse> createActualizarStockArticuloSResponse(ActualizarStockArticuloSResponse value) {
         return new JAXBElement<ActualizarStockArticuloSResponse>(_ActualizarStockArticuloSResponse_QNAME, ActualizarStockArticuloSResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AgregarArticuloFacturaOrcS }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AgregarArticuloFacturaOrcS }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "agregarArticuloFacturaOrcS")
+    public JAXBElement<AgregarArticuloFacturaOrcS> createAgregarArticuloFacturaOrcS(AgregarArticuloFacturaOrcS value) {
+        return new JAXBElement<AgregarArticuloFacturaOrcS>(_AgregarArticuloFacturaOrcS_QNAME, AgregarArticuloFacturaOrcS.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AgregarArticuloFacturaOrcSResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AgregarArticuloFacturaOrcSResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "agregarArticuloFacturaOrcSResponse")
+    public JAXBElement<AgregarArticuloFacturaOrcSResponse> createAgregarArticuloFacturaOrcSResponse(AgregarArticuloFacturaOrcSResponse value) {
+        return new JAXBElement<AgregarArticuloFacturaOrcSResponse>(_AgregarArticuloFacturaOrcSResponse_QNAME, AgregarArticuloFacturaOrcSResponse.class, null, value);
     }
 
     /**

@@ -35,7 +35,7 @@ public class cabeceraFactura_crud {
     //public articulo_crud art_crud = new articulo_crud();
     public ArrayList<Articulo> articulos = (ArrayList<Articulo>) port.listarArticuloS();
     public ArrayList<String> listaNombreArticulo = cmbNombreArticulos();
-
+ 
     public cliente_crud cli_crud = new cliente_crud();
     public ciudad_crud ciu_crud = new ciudad_crud();
 
@@ -96,7 +96,7 @@ public class cabeceraFactura_crud {
         for (Articulo a : articulos) {
             if (a.getNombreArticulo().equals(this.nombreItem)) {
                 int cantidadDB = Integer.parseInt(a.getStockArticulo());
-                System.out.println("ANTIDAD ANTIGUA: " + cantidadDB);
+                System.out.println("CANTIDAD ANTIGUA: " + cantidadDB);
                 int cantidadSelec = Integer.parseInt(this.cantidadItem);
                 result = cantidadDB - cantidadSelec;
                 System.out.println("CANTIDAD NUEVA: " + result);
@@ -126,9 +126,9 @@ public class cabeceraFactura_crud {
         int resultado;
         try {
             if (this.validaCantidadItem()) {
-                precioItem = String.valueOf(this.obtenerPrecioItem());
-                precioTotalItem = String.valueOf(this.ObtenerPrecioTotalItem());
-                resultado = port.agregarProductoS(numCabecera, nombreItem, cantidadItem, precioItem, precioTotalItem);
+                //precioItem = String.valueOf(this.obtenerPrecioItem());
+                //precioTotalItem = String.valueOf(this.ObtenerPrecioTotalItem());
+                resultado = port.agregarArticuloFacturaOrcS(numCabecera, nombreItem, cantidadItem);
                 if (resultado == 1) {
                     mensajeItem = "Articulo insertado correctamente";
                 } else {
@@ -234,7 +234,6 @@ public class cabeceraFactura_crud {
         fecha = cabeceraFactura.getFecha();
         precioTotal = cabeceraFactura.getPrecioTotal();
 
-        /*
         try {
             this.buscarDetalleFactura(numCabecera);
             mensajeCabecera = " Factura Cargada";
@@ -242,7 +241,6 @@ public class cabeceraFactura_crud {
             mensajeCabecera = " No se encontro factura";
             System.out.println("ERROR NULL");
         }
-         */
     }
 
     public void buscarDetalleFactura(String numFactura) {

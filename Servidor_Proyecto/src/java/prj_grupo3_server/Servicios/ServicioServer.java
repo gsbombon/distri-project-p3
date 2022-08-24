@@ -65,6 +65,7 @@ import static prj_grupo3_server.Conexion.OracleConectionFacturacion.agregarArtic
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCabeceraFacturaPorRucOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarDetalleFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.crearCabeceraFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarClienteOrc;
@@ -605,10 +606,14 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "buscarDetalleFacturaS")
-    public DetalleFactura buscarDetalleFacturaS(@WebParam(name = "numCabecera") String numCabecera) {
-        Conectar();
+    public DetalleFactura buscarDetalleFacturaOrcS(@WebParam(name = "numCabecera") String numCabecera) {
+        ConectarOF();
         DetalleFactura detalleFac = new DetalleFactura();
-        detalleFac = buscarDetalleFactura(numCabecera);
+        try {
+            detalleFac = buscarDetalleFacturaOrc(numCabecera);
+        } catch (SQLException ex) {
+            System.out.println(""+ex.getMessage());
+        }
         return detalleFac;
     }
 
