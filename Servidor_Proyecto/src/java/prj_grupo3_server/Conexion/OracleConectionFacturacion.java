@@ -10,13 +10,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.jms.Destination;
+import javax.jms.ExceptionListener;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import org.apache.activemq.ActiveMQConnectionFactory;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.Ciudad;
 import prj_grupo3_server.Modelo.Cliente;
 import prj_grupo3_server.Modelo.DetalleFactura;
 import prj_grupo3_server.Modelo.ItemFactura;
 
-public class OracleConectionFacturacion {
+public class OracleConectionFacturacion implements ExceptionListener {
 
     static Connection con = null;
 
@@ -282,15 +292,15 @@ public class OracleConectionFacturacion {
 
     // BUSCAR DETALLE DE LA FACTURA
     public static DetalleFactura buscarDetalleFacturaOrc(String numFactura) throws SQLException {
-        double precioTotalFactura=0;
+        double precioTotalFactura = 0;
         int codFact = Integer.parseInt(numFactura);
         DetalleFactura detalleFac = new DetalleFactura();
         ArrayList<ItemFactura> itemsArray = new ArrayList<>();
-        
+
         String sql = "SELECT * FROM dc_factura WHERE numero_cabecera_fact_cxc=?";
-        
+
         PreparedStatement statement = con.prepareStatement(sql);
-        
+
         statement.setInt(1, codFact);
         ResultSet result = statement.executeQuery();
         while (result.next()) {
@@ -299,7 +309,7 @@ public class OracleConectionFacturacion {
             String precio = String.valueOf(precioArticulo(nomArticulo));
             String cantArt = result.getString("CANTIDAD_DC_FACTURA");
             String precioTotalItem = result.getNString("PRECIO_DC_FACTURA");
-            precioTotalFactura +=  Double.parseDouble(precioTotalItem);
+            precioTotalFactura += Double.parseDouble(precioTotalItem);
             ItemFactura item = new ItemFactura(nomArticulo, precio, cantArt, precioTotalItem);
             itemsArray.add(item);
         }
@@ -308,6 +318,65 @@ public class OracleConectionFacturacion {
         detalleFac.setPrecioTotal(precioTotalFactura);
         return detalleFac;
     }
+
+    public static void crearFacturaOrcCola(String numCabecera, String rucCliente,
+            String nomCiudad, String fecha, String precioFinal) throws JMSException {
+        String datos = numCabecera+";"+rucCliente+";"+nomCiudad+";"+fecha+";"+precioFinal;
+        OracleConectionFacturacion p = new OracleConectionFacturacion();
+        p.processProducer("FACTURACION", datos);        
+    }
+
+    // METODOS PARA COLAS
+    void processProducer(String nomCola, String mensaje) throws JMSException {
+        try {
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+            javax.jms.Connection connection = connectionFactory.createConnection();
+            connection.start();
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Destination destination = session.createQueue(nomCola);
+            MessageProducer producer = session.createProducer(destination);
+            TextMessage message = session.createTextMessage(mensaje);
+            producer.send(message);
+            session.close();
+            connection.close();
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
+        }
+    }
+
+    void processConsumer(String nomCola) {
+        try {
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+            javax.jms.Connection connection = connectionFactory.createConnection();
+            connection.setExceptionListener(this);
+            Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+            Destination destination = session.createQueue(nomCola);
+            MessageConsumer consumer = session.createConsumer(destination);
+            consumer.setMessageListener(listener);
+            connection.start();
+            Thread.sleep(3000);
+            connection.close();
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
+        }
+    }
+
+    MessageListener listener = new MessageListener() {
+        public void onMessage(Message msg) {
+            if (msg instanceof TextMessage) {
+                TextMessage textMessage = (TextMessage) msg;
+                String text = null;
+                try {
+                    text = textMessage.getText();
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Recibido: " + text);
+            } else {
+                System.out.println("Recibido: " + msg);
+            }
+        }
+    };
 
     //METODOS NO CONTABLES
     public static String nombreArticulo(int codArticulo) throws SQLException {
@@ -394,6 +463,11 @@ public class OracleConectionFacturacion {
             codigo = result.getInt(1);
         }
         return codigo;
+    }
+
+    @Override
+    public void onException(JMSException jmse) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

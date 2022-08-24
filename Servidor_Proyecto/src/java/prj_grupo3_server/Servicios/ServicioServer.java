@@ -67,6 +67,7 @@ import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCiudad
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarDetalleFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.crearCabeceraFacturaOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.crearFacturaOrcCola;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.insertarCiudadOrc;
@@ -631,8 +632,8 @@ public class ServicioServer {
             @WebParam(name = "codCiudad") String codCiudad,
             @WebParam(name = "precioFinal") String precioFinal) {
         try {
-            Conectar();
-            crearFactura(numFactura, rucCliente, codCiudad, fecha, precioFinal);
+            ConectarOF();
+            crearFacturaOrcCola(numFactura, rucCliente, codCiudad, fecha, precioFinal);
             return 1;
         } catch (Exception e) {
             return 2;
