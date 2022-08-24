@@ -100,6 +100,10 @@
 
 <xs:element name="buscarMovimientoSResponse" type="tns:buscarMovimientoSResponse"/>
 
+<xs:element name="cargarColaInventarioOrcS" type="tns:cargarColaInventarioOrcS"/>
+
+<xs:element name="cargarColaInventarioOrcSResponse" type="tns:cargarColaInventarioOrcSResponse"/>
+
 <xs:element name="crearCabeceraFacturaS" type="tns:crearCabeceraFacturaS"/>
 
 <xs:element name="crearCabeceraFacturaSResponse" type="tns:crearCabeceraFacturaSResponse"/>
@@ -443,6 +447,16 @@
 </xs:complexType>
 
 <xs:complexType name="insertarFormaPagoSResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cargarColaInventarioOrcS">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="cargarColaInventarioOrcSResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
 </xs:sequence>

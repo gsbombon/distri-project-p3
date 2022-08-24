@@ -76,6 +76,10 @@
                                         <label class="form-label"> Factura # </label>
                                         <h:inputText id="numCabeceraDetalle" value="#{cabeceraFactura_crud.numCabecera}" class="form-control"  disabled="true" />
                                     </div>
+                                    <div class="row">
+                                        <h:commandButton id="cargarCola" value="Cargar Cola Inventario" action="#{cabeceraFactura_crud.cargarColaInventario()}" class="btn btn-success my-3 mx-2" >
+                                        </h:commandButton>
+                                    </div>
                                     <div class="col" >
                                         <label class="form-label"> Seleccione producto </label>
                                         <h:selectOneMenu id="ciudadDetalle" value="#{cabeceraFactura_crud.nombreItem}" class="form-control">

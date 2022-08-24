@@ -113,6 +113,14 @@ public class cabeceraFactura_crud {
             System.out.println("Error: " + ex.getMessage());
         }
     }
+    
+    public void cargarColaInventario() {
+        try {
+            port.cargarColaInventarioOrcS();
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
 
     public ArrayList<String> cmbNombreArticulos() {
         ArrayList<String> nombresArticulos = new ArrayList<>();
@@ -121,7 +129,7 @@ public class cabeceraFactura_crud {
         });
         return nombresArticulos;
     }
-
+ 
     public void agregarItem() {
         int resultado;
         try {

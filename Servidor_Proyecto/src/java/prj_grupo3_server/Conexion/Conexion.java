@@ -792,7 +792,6 @@ public class Conexion {
             Fac.setFecha(fecha);
             Fac.setRucCliente(rCliente);
             Fac.setNomCiudad(Ciudad);
-            ;
         }
         return Fac;
     }

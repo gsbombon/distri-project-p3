@@ -74,6 +74,8 @@ public class ObjectFactory {
     private final static QName _BuscarMovimientoSN_QNAME = new QName("http://Servicios.prj_grupo3_server/", "buscarMovimientoSN");
     private final static QName _BuscarMovimientoSNResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "buscarMovimientoSNResponse");
     private final static QName _BuscarMovimientoSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "buscarMovimientoSResponse");
+    private final static QName _CargarColaInventarioOrcS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "cargarColaInventarioOrcS");
+    private final static QName _CargarColaInventarioOrcSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "cargarColaInventarioOrcSResponse");
     private final static QName _CrearCabeceraFacturaS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "crearCabeceraFacturaS");
     private final static QName _CrearCabeceraFacturaSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "crearCabeceraFacturaSResponse");
     private final static QName _CrearCabeceraInventarioS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "crearCabeceraInventarioS");
@@ -538,6 +540,22 @@ public class ObjectFactory {
      */
     public BuscarMovimientoSResponse createBuscarMovimientoSResponse() {
         return new BuscarMovimientoSResponse();
+    }
+
+    /**
+     * Create an instance of {@link CargarColaInventarioOrcS }
+     * 
+     */
+    public CargarColaInventarioOrcS createCargarColaInventarioOrcS() {
+        return new CargarColaInventarioOrcS();
+    }
+
+    /**
+     * Create an instance of {@link CargarColaInventarioOrcSResponse }
+     * 
+     */
+    public CargarColaInventarioOrcSResponse createCargarColaInventarioOrcSResponse() {
+        return new CargarColaInventarioOrcSResponse();
     }
 
     /**
@@ -1748,6 +1766,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "buscarMovimientoSResponse")
     public JAXBElement<BuscarMovimientoSResponse> createBuscarMovimientoSResponse(BuscarMovimientoSResponse value) {
         return new JAXBElement<BuscarMovimientoSResponse>(_BuscarMovimientoSResponse_QNAME, BuscarMovimientoSResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CargarColaInventarioOrcS }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link CargarColaInventarioOrcS }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "cargarColaInventarioOrcS")
+    public JAXBElement<CargarColaInventarioOrcS> createCargarColaInventarioOrcS(CargarColaInventarioOrcS value) {
+        return new JAXBElement<CargarColaInventarioOrcS>(_CargarColaInventarioOrcS_QNAME, CargarColaInventarioOrcS.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CargarColaInventarioOrcSResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link CargarColaInventarioOrcSResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "cargarColaInventarioOrcSResponse")
+    public JAXBElement<CargarColaInventarioOrcSResponse> createCargarColaInventarioOrcSResponse(CargarColaInventarioOrcSResponse value) {
+        return new JAXBElement<CargarColaInventarioOrcSResponse>(_CargarColaInventarioOrcSResponse_QNAME, CargarColaInventarioOrcSResponse.class, null, value);
     }
 
     /**

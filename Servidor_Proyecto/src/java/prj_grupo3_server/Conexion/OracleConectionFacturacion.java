@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jms.Destination;
 import javax.jms.ExceptionListener;
 import javax.jms.JMSException;
@@ -24,6 +25,7 @@ import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.Ciudad;
 import prj_grupo3_server.Modelo.Cliente;
 import prj_grupo3_server.Modelo.DetalleFactura;
+import prj_grupo3_server.Modelo.Factura;
 import prj_grupo3_server.Modelo.ItemFactura;
 
 public class OracleConectionFacturacion implements ExceptionListener {
@@ -31,7 +33,6 @@ public class OracleConectionFacturacion implements ExceptionListener {
     static Connection con = null;
 
     public static Connection ConectarOF() {
-
         try {
             Class.forName("oracle.jdbc.OracleDriver");
             String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -290,6 +291,29 @@ public class OracleConectionFacturacion implements ExceptionListener {
         }
     }
 
+    public static void eliminarCabeceraFacturaOrc(String numCabecera) throws SQLException {
+        int idCabecera = Integer.parseInt(numCabecera);
+        //eliminarDetalleFactura(numCabecera);
+        String sql = "DELETE CABECERA_FACTURA WHERE numero_cabecera_fact_cxc=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, idCabecera);
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("Eliminado correctamente !");
+        }
+    }
+
+    public static void eliminarDetalleFacturaOrc(String numCabecera) throws SQLException {
+        int idCabecera = Integer.parseInt(numCabecera);
+        String sql = "DELETE DC_FACTURA WHERE numero_cabecera_fact_cxc=?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, idCabecera);
+        int rowsDeleted = statement.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println("Eliminado correctamente !");
+        }
+    }
+
     // BUSCAR DETALLE DE LA FACTURA
     public static DetalleFactura buscarDetalleFacturaOrc(String numFactura) throws SQLException {
         double precioTotalFactura = 0;
@@ -320,10 +344,18 @@ public class OracleConectionFacturacion implements ExceptionListener {
     }
 
     public static void crearFacturaOrcCola(String numCabecera, String rucCliente,
-            String nomCiudad, String fecha, String precioFinal) throws JMSException {
-        String datos = "UPDATE ..... ";
+            String nomCiudad, String fecha, String precioFinal) throws JMSException, SQLException {
+        int numFactura = Integer.parseInt(numCabecera);
+        String datos = "UPDATE CABECERA_FACTURA SET valor_cabecera_facu='" + precioFinal + "' WHERE numero_cabecera_fact_cxc=" + numFactura;
         OracleConectionFacturacion p = new OracleConectionFacturacion();
         p.processProducer("FACTURACION", datos);
+    }
+
+    public static void cargarColaInventarioOrc() {
+        String nombreCola = "INVENTARIO";
+        OracleConectionFacturacion p = new OracleConectionFacturacion();
+        System.out.println("Leyendo Datos de de la cola " + nombreCola);
+        p.processConsumer(nombreCola);
     }
 
     // METODOS PARA COLAS
@@ -345,6 +377,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
     }
 
     void processConsumer(String nomCola) {
+
         try {
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
             javax.jms.Connection connection = connectionFactory.createConnection();
@@ -363,23 +396,60 @@ public class OracleConectionFacturacion implements ExceptionListener {
 
     MessageListener listener = new MessageListener() {
         public void onMessage(Message msg) {
+            ConectarOF();
             if (msg instanceof TextMessage) {
                 TextMessage textMessage = (TextMessage) msg;
                 String text = null;
                 try {
                     text = textMessage.getText();
-                    //EJECUTAR SQL
-                    
+                    PreparedStatement statement = con.prepareStatement(text);
+                    statement.executeQuery();
                 } catch (JMSException e) {
                     e.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
                 System.out.println("Recibido: " + text);
-                
+
             } else {
                 System.out.println("Recibido: " + msg);
             }
         }
     };
+
+    // REPORTE 1
+    public static ArrayList<Factura> listarFacturaOrc() throws SQLException {
+        ArrayList<Factura> facturas = new ArrayList<>();
+        String sql = "SELECT * FROM cabecera_factura";
+        PreparedStatement statement = con.prepareStatement(sql);
+        ResultSet result = statement.executeQuery();
+
+        while (result.next()) {
+            String total = result.getString("VALOR_CABECERA_FACU");
+            int idCliente = result.getInt("CODIGO_CLI");
+            int idCiudad = result.getInt("CODIGO_CIU");
+            int idFactura = result.getInt("NUMERO_CABECERA_FACT_CXC");
+            Date fechaR = result.getDate("FECHA_CABECERA_FACTU");
+
+            String cliente = rucCliente(idCliente);
+            String ciudad = nombreCiudad(idCiudad);
+            String fecha = String.valueOf(fechaR);
+            String codigo = String.valueOf(idFactura);
+            String tipoPago = "";
+
+            double totalFac = Double.parseDouble(total);
+            Factura fac = new Factura();
+            fac.setCodFactura(codigo);
+            fac.setFecha(fecha);
+            fac.setNomCiudad(ciudad);
+            fac.setRucCliente(cliente);
+            fac.setTipoPago(tipoPago);
+            fac.setTotalFactura(totalFac);
+
+            facturas.add(fac);
+        }
+        return facturas;
+    }
 
     //METODOS NO CONTABLES
     public static String nombreArticulo(int codArticulo) throws SQLException {

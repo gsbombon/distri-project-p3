@@ -27,6 +27,18 @@ public interface ServicioServer {
 
     /**
      * 
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "cargarColaInventarioOrcS", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CargarColaInventarioOrcS")
+    @ResponseWrapper(localName = "cargarColaInventarioOrcSResponse", targetNamespace = "http://Servicios.prj_grupo3_server/", className = "prj_grupo3_server.servicios.CargarColaInventarioOrcSResponse")
+    @Action(input = "http://Servicios.prj_grupo3_server/ServicioServer/cargarColaInventarioOrcSRequest", output = "http://Servicios.prj_grupo3_server/ServicioServer/cargarColaInventarioOrcSResponse")
+    public int cargarColaInventarioOrcS();
+
+    /**
+     * 
      * @param numCabecera
      * @return
      *     returns prj_grupo3_server.servicios.DetalleFactura

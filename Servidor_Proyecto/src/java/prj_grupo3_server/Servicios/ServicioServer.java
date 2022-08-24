@@ -66,14 +66,18 @@ import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCabece
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.buscarDetalleFacturaOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.cargarColaInventarioOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.crearCabeceraFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.crearFacturaOrcCola;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarCabeceraFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.eliminarDetalleFacturaOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.insertarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.insertarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarClienteOrc;
+import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarFacturaOrc;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.DetalleFactura;
@@ -533,8 +537,8 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarDetalleFacturaS")
     public int eliminarDetalleFacturaS(@WebParam(name = "numFactura") String numFactura) {
         try {
-            Conectar();
-            eliminarDetalleFactura(numFactura);
+            ConectarOF();
+            eliminarDetalleFacturaOrc(numFactura);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -568,10 +572,9 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarCabeceraFacturaS")
     public int eliminarCabeceraFacturaS(@WebParam(name = "numCabecera") String numCabecera) {
         try {
-            Conectar();
-            eliminarCabeceraFactura(numCabecera);
-            eliminarDetalleFactura(numCabecera);
-            eliminarFactura(numCabecera);
+            ConectarOF();
+            eliminarDetalleFacturaOrc(numCabecera);
+            eliminarCabeceraFacturaOrc(numCabecera);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -613,7 +616,7 @@ public class ServicioServer {
         try {
             detalleFac = buscarDetalleFacturaOrc(numCabecera);
         } catch (SQLException ex) {
-            System.out.println(""+ex.getMessage());
+            System.out.println("" + ex.getMessage());
         }
         return detalleFac;
     }
@@ -655,14 +658,14 @@ public class ServicioServer {
             return 2;
         }
     }
-    
+
     @WebMethod(operationName = "agregarArticuloFacturaOrcS")
     public int agregarArticuloFacturaOrcS(@WebParam(name = "numFactura") String numFactura,
             @WebParam(name = "nombreItem") String nombreItem,
             @WebParam(name = "cantidadItem") String cantidadItem) {
         try {
             ConectarOF();
-            agregarArticuloFacturaOrc(numFactura,nombreItem,cantidadItem); 
+            agregarArticuloFacturaOrc(numFactura, nombreItem, cantidadItem);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -708,11 +711,26 @@ public class ServicioServer {
         }
     }
 
+    @WebMethod(operationName = "cargarColaInventarioOrcS")
+    public int cargarColaInventarioOrcS() {
+        try {
+            ConectarOF();
+            cargarColaInventarioOrc();
+            return 1;
+        } catch (Exception e) {
+            return 2;
+        }
+    }
+
     @WebMethod(operationName = "listarFacturasS")
-    public ArrayList<Factura> listarFacturasS() {
-        Conectar();
+    public ArrayList<Factura> listarFacturasS() {       
         ArrayList<Factura> art = new ArrayList<>();
-        art = listarFactura();
+        try {
+            ConectarOF();
+            art = listarFacturaOrc();
+        } catch (SQLException ex) {
+            System.out.println(""+ex.getMessage());
+        }
         return art;
     }
 
