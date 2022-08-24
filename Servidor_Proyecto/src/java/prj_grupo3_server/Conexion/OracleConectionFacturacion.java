@@ -323,7 +323,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
             String nomCiudad, String fecha, String precioFinal) throws JMSException {
         String datos = "UPDATE ..... ";
         OracleConectionFacturacion p = new OracleConectionFacturacion();
-        p.processProducer("FACTURACION", datos);        
+        p.processProducer("FACTURACION", datos);
     }
 
     // METODOS PARA COLAS
@@ -369,10 +369,12 @@ public class OracleConectionFacturacion implements ExceptionListener {
                 try {
                     text = textMessage.getText();
                     //EJECUTAR SQL
+                    
                 } catch (JMSException e) {
                     e.printStackTrace();
                 }
                 System.out.println("Recibido: " + text);
+                
             } else {
                 System.out.println("Recibido: " + msg);
             }

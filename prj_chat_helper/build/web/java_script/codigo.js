@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    var url = 'ws://' + window.location.host + '/prj_chat_websocket/chat',
+    var url = 'ws://'+window.location.host+ '/prj_chat_helper/chat',
             ws = new WebSocket(url),
             mensajes = document.getElementById('conversacion'),
             boton = document.getElementById('btn_enviar'),

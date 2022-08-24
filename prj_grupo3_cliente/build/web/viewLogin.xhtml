@@ -14,6 +14,7 @@
 
     </h:head>
     <body>
+
         <section class="vh-100" style="background-color: #9A616D;">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -41,9 +42,18 @@
                                                 <h:inputSecret id="password" value="#{usuario_crud.password}" class="form-control form-control-lg" ></h:inputSecret>
                                                 <label class="form-label">Contraseña</label>
                                             </div>
-                                            <div class="pt-1 mb-4">
-                                                <h:commandButton class="btn btn-dark btn-lg btn-block text-white" id="ingresarUsuario" value="Iniciar Sesion" action="#{usuario_crud.ingresar}">
-                                                </h:commandButton>
+                                            <div class="pt-1 mb-4 row">
+                                                <div class="col">
+                                                    <h:commandButton class="btn btn-dark btn-lg btn-block text-white" id="ingresarUsuario" value="Iniciar Sesion" action="#{usuario_crud.ingresar}">
+                                                    </h:commandButton>
+                                                </div>
+                                                <div class="col">
+                                                    <!-- The JS SDK Login Button -->
+                                                    <!-- Twitter -->
+                                                    <a href="http://localhost:8080/prj_grupo3_cliente/faces/loginFacebook.jsp" style="background-color: #3b5998;" class="btn btn-primary btn-lg btn-block position-relative form-control">Login with Facebook</a>
+                                                </div>                                                
+                                                <div id="status">
+                                                </div>
                                                 <!-- 
                                                 <a class="btn btn-dark btn-lg btn-block text-white" href="http://localhost:8080/prj_grupo3_cliente/faces/viewMain.xhtml"> Iniciar Sesion</a>
                                                 -->
@@ -67,5 +77,6 @@
                 </div>
             </div>
         </section>
+
     </body>
 </html>
