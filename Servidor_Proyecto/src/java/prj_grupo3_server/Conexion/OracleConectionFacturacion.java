@@ -321,7 +321,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
 
     public static void crearFacturaOrcCola(String numCabecera, String rucCliente,
             String nomCiudad, String fecha, String precioFinal) throws JMSException {
-        String datos = numCabecera+";"+rucCliente+";"+nomCiudad+";"+fecha+";"+precioFinal;
+        String datos = "UPDATE ..... ";
         OracleConectionFacturacion p = new OracleConectionFacturacion();
         p.processProducer("FACTURACION", datos);        
     }
@@ -349,7 +349,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
             javax.jms.Connection connection = connectionFactory.createConnection();
             connection.setExceptionListener(this);
-            Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             Destination destination = session.createQueue(nomCola);
             MessageConsumer consumer = session.createConsumer(destination);
             consumer.setMessageListener(listener);
@@ -368,6 +368,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
                 String text = null;
                 try {
                     text = textMessage.getText();
+                    //EJECUTAR SQL
                 } catch (JMSException e) {
                     e.printStackTrace();
                 }
