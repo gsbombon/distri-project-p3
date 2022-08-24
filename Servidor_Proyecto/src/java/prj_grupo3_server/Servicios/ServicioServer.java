@@ -78,6 +78,18 @@ import static prj_grupo3_server.Conexion.OracleConectionFacturacion.insertarClie
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarCiudadOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarClienteOrc;
 import static prj_grupo3_server.Conexion.OracleConectionFacturacion.listarFacturaOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.ConectarOC;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.actualizarCobradorOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.actualizarFPOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.buscarCobradorOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.buscarFPOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.eliminarCobradorOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.eliminarFPOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.insertarCobradorOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.insertarFPOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.listarCobradorORC;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.listarFPOrc;
+import static prj_grupo3_server.Conexion.OracleConnectionCuentas.listarFacturaORC;
 import prj_grupo3_server.Modelo.Articulo;
 import prj_grupo3_server.Modelo.CabeceraFactura;
 import prj_grupo3_server.Modelo.DetalleFactura;
@@ -224,12 +236,13 @@ public class ServicioServer {
 //***********COBRADOR************
 
     @WebMethod(operationName = "insertarCobradorS")
-    public int insertarCobradorS(@WebParam(name = "Cedula_Cobrador") String Cedula_Cobrador, @WebParam(name = "Nombre_Cobrador") String Nombre_Cobrador, @WebParam(name = "Direccion_Cobrador") String Direccion_Cobrador) {
+    public int insertarCobradorS( @WebParam(name = "Nombre_Cobrador") String Nombre_Cobrador, @WebParam(name = "Direccion_Cobrador") String Direccion_Cobrador ,@WebParam(name = "Cedula_Cobrador") String Cedula_Cobrador) {
         System.out.println("1");
         try {
-            Conectar();
-            insertarCobrador(Cedula_Cobrador, Nombre_Cobrador, Direccion_Cobrador);
-
+           // Conectar();
+            //insertarCobrador(Cedula_Cobrador, Nombre_Cobrador, Direccion_Cobrador);
+            ConectarOC();
+             insertarCobradorOrc(Nombre_Cobrador, Direccion_Cobrador,Cedula_Cobrador);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -239,9 +252,10 @@ public class ServicioServer {
     @WebMethod(operationName = "actualizarCobradorS")
     public int actualizarCobradorS(@WebParam(name = "Cedula_Cobrador") String Cedula_Cobrador, @WebParam(name = "Nombre_Cobrador") String Nombre_Cobrador, @WebParam(name = "Direccion_Cobrador") String Direccion_Cobrador) {
         try {
-            Conectar();
-            actualizarCobrador(Cedula_Cobrador, Nombre_Cobrador, Direccion_Cobrador);
-
+            //Conectar();
+          //  actualizarCobrador(Cedula_Cobrador, Nombre_Cobrador, Direccion_Cobrador);
+            ConectarOC();
+            actualizarCobradorOrc(Cedula_Cobrador, Nombre_Cobrador, Direccion_Cobrador);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -251,8 +265,10 @@ public class ServicioServer {
     @WebMethod(operationName = "eliminarCobradorS")
     public int eliminarCobradorS(@WebParam(name = "Cedula_Cobrador") String Cedula_Cobrador) {
         try {
-            Conectar();
-            eliminarCobrador(Cedula_Cobrador);
+          //  Conectar();
+           // eliminarCobrador(Cedula_Cobrador);
+            ConectarOC();
+            eliminarCobradorOrc(Cedula_Cobrador);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -262,18 +278,31 @@ public class ServicioServer {
     @WebMethod(operationName = "listarCobradorS")
     public ArrayList<Cobrador> listarCobradorS() {
 
-        Conectar();
+       // Conectar();
+        ConectarOC();
         ArrayList<Cobrador> cobradorr = new ArrayList<>();
-        cobradorr = listarCobrador();
+        //cobradorr = listarCobrador();
+        
+        try {
+            cobradorr = listarCobradorORC();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return cobradorr;
     }
 
     @WebMethod(operationName = "buscarCobradorS")
     public Cobrador buscarCobradorS(@WebParam(name = "Cedula_Cobrador") String Cedula_Cobrador) {
 
-        Conectar();
+        //Conectar();
+        ConectarOC();
         Cobrador cobradorr = new Cobrador();
-        cobradorr = buscarCobrador(Cedula_Cobrador);
+        try {
+            //cobradorr = buscarCobrador(Cedula_Cobrador);
+            cobradorr =buscarCobradorOrc(Cedula_Cobrador);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return cobradorr;
     }
 
@@ -282,9 +311,10 @@ public class ServicioServer {
     public int insertarFormaPagoS(@WebParam(name = "Codigo_FP") String Codigo_FP, @WebParam(name = "Nombre_FP") String Nombre_FP) {
         System.out.println("1");
         try {
-            Conectar();
-            insertarFormaPago(Codigo_FP, Nombre_FP);
-
+            //Conectar();
+           // insertarFormaPago(Codigo_FP, Nombre_FP);
+            ConectarOC();
+            insertarFPOrc(Nombre_FP);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -294,9 +324,10 @@ public class ServicioServer {
     @WebMethod(operationName = "actualizarFormaPagoS")
     public int actualizarFormaPagoS(@WebParam(name = "Codigo_FP") String Codigo_FP, @WebParam(name = "Nombre_FP") String Nombre_FP) {
         try {
-            Conectar();
-            actualizarFormaPago(Codigo_FP, Nombre_FP);
-
+            //Conectar();
+           // actualizarFormaPago(Codigo_FP, Nombre_FP);
+            ConectarOC();
+            actualizarFPOrc(Codigo_FP, Nombre_FP);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -304,10 +335,12 @@ public class ServicioServer {
     }
 
     @WebMethod(operationName = "eliminarFormaPagoS")
-    public int eliminarFormaPagoS(@WebParam(name = "Codigo_FP") String Codigo_FP) {
+    public int eliminarFormaPagoS(@WebParam(name = "Codigo_FP") int Codigo_FP) {
         try {
-            Conectar();
-            eliminarFormaPago(Codigo_FP);
+            //Conectar();
+            //eliminarFormaPago(Codigo_FP);
+              ConectarOC();
+            eliminarFPOrc(Codigo_FP);
             return 1;
         } catch (Exception e) {
             return 2;
@@ -317,18 +350,30 @@ public class ServicioServer {
     @WebMethod(operationName = "listarFormaPagoS")
     public ArrayList<FormaPago> listarFormaPagoS() {
 
-        Conectar();
+        //Conectar();
+        ConectarOC();
         ArrayList<FormaPago> formapago = new ArrayList<>();
-        formapago = listarFormaPago();
+        try {
+            //formapago = listarFormaPago();
+            formapago = listarFPOrc();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return formapago;
     }
 
     @WebMethod(operationName = "buscarFormaPagoS")
-    public FormaPago buscarFormaPagoS(@WebParam(name = "Codigo_FP") String Codigo_FP) {
+    public FormaPago buscarFormaPagoS(@WebParam(name = "Codigo_FP") int Codigo_FP) {
 
-        Conectar();
+        //Conectar();
+          ConectarOC();
         FormaPago formapago = new FormaPago();
-        formapago = buscarFormaPago(Codigo_FP);
+      //  formapago = buscarFormaPago(Codigo_FP);
+        try {
+            formapago = buscarFPOrc(Codigo_FP);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return formapago;
     }
 
@@ -722,15 +767,19 @@ public class ServicioServer {
         }
     }
 
-    @WebMethod(operationName = "listarFacturasS")
-    public ArrayList<Factura> listarFacturasS() {       
-        ArrayList<Factura> art = new ArrayList<>();
+      @WebMethod(operationName = "listarFacturasS")
+    public ArrayList<CabeceraFactura> listarFacturasS() {
+       // Conectar();
+         ConectarOC();
+        ArrayList<CabeceraFactura> art = new ArrayList<>();
+       
         try {
-            ConectarOF();
-            art = listarFacturaOrc();
+            // art = listarFactura();
+            art = listarFacturaORC();
         } catch (SQLException ex) {
-            System.out.println(""+ex.getMessage());
+            Logger.getLogger(ServicioServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return art;
     }
 
