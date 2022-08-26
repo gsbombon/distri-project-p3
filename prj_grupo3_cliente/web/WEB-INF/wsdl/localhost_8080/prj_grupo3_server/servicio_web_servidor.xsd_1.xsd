@@ -204,9 +204,9 @@
 
 <xs:element name="listarCobradorSResponse" type="tns:listarCobradorSResponse"/>
 
-<xs:element name="listarFacturasS" type="tns:listarFacturasS"/>
+<xs:element name="listarFacturasOrcS" type="tns:listarFacturasOrcS"/>
 
-<xs:element name="listarFacturasSResponse" type="tns:listarFacturasSResponse"/>
+<xs:element name="listarFacturasOrcSResponse" type="tns:listarFacturasOrcSResponse"/>
 
 <xs:element name="listarFormaPagoS" type="tns:listarFormaPagoS"/>
 
@@ -392,6 +392,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="listarFacturasOrcS">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listarFacturasOrcSResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:factura" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="insertarCobradorS">
 <xs:sequence>
 <xs:element name="Cedula_Cobrador" type="xs:string" minOccurs="0"/>
@@ -514,6 +524,28 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="buscarCabeceraFacturaS">
+<xs:sequence>
+<xs:element name="numCabecera" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarCabeceraFacturaSResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cabeceraFactura" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cabeceraFactura">
+<xs:sequence>
+<xs:element name="codCiudad" type="xs:string" minOccurs="0"/>
+<xs:element name="fecha" type="xs:string" minOccurs="0"/>
+<xs:element name="numCabecera" type="xs:string" minOccurs="0"/>
+<xs:element name="precioTotal" type="xs:string" minOccurs="0"/>
+<xs:element name="rucCliente" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="agregarProductoS">
 <xs:sequence>
 <xs:element name="numFactura" type="xs:string" minOccurs="0"/>
@@ -543,28 +575,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="buscarCabeceraFacturaS">
-<xs:sequence>
-<xs:element name="numCabecera" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="buscarCabeceraFacturaSResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:cabeceraFactura" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="cabeceraFactura">
-<xs:sequence>
-<xs:element name="codCiudad" type="xs:string" minOccurs="0"/>
-<xs:element name="fecha" type="xs:string" minOccurs="0"/>
-<xs:element name="numCabecera" type="xs:string" minOccurs="0"/>
-<xs:element name="precioTotal" type="xs:string" minOccurs="0"/>
-<xs:element name="rucCliente" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="listarArticuloS">
 <xs:sequence/>
 </xs:complexType>
@@ -590,16 +600,6 @@
 <xs:element name="codigo_Ciudad" type="xs:string" minOccurs="0"/>
 <xs:element name="id" type="xs:int"/>
 <xs:element name="nombre_Ciudad" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="listarFacturasS">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="listarFacturasSResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:factura" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -740,6 +740,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="insertarMovimientoS">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="signo" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertarMovimientoSResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="listarFormaPagoS">
 <xs:sequence/>
 </xs:complexType>
@@ -755,19 +768,6 @@
 <xs:element name="codigo" type="xs:string" minOccurs="0"/>
 <xs:element name="id" type="xs:int"/>
 <xs:element name="nombre_FP" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="insertarMovimientoS">
-<xs:sequence>
-<xs:element name="nombre" type="xs:string" minOccurs="0"/>
-<xs:element name="signo" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="insertarMovimientoSResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -864,18 +864,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="buscarCobradorS">
-<xs:sequence>
-<xs:element name="Cedula_Cobrador" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="buscarCobradorSResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:cobrador" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="actualizarCiudadS">
 <xs:sequence>
 <xs:element name="Codigo_Ciudad" type="xs:string" minOccurs="0"/>
@@ -886,6 +874,18 @@
 <xs:complexType name="actualizarCiudadSResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarCobradorS">
+<xs:sequence>
+<xs:element name="Cedula_Cobrador" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarCobradorSResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cobrador" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

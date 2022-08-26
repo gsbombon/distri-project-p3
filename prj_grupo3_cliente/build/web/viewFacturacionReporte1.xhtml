@@ -27,7 +27,7 @@ and open the template in the editor.
                 <hr class=""></hr>
             </div>
         </div>
-  
+
         <div id="content" class="container my-5">
             <h1 class="form-label text-center"> Reporte </h1>
             <h:form>
@@ -45,25 +45,40 @@ and open the template in the editor.
                     <h:commandButton id="limpiar" value="Limpiar Reporte" action="#{reporte1_crud.limpiarForm}" class="btn btn-success my-2">
                     </h:commandButton>
                 </div>
-
             </h:form>
-            <div class="row">
-                <hr class="my-3"></hr>
-                <h2 class="form-label text-left"> Matriz </h2>
-                <h:dataTable value="" var="" class="table table-striped mt-4" >
-                    <h:column>
-                        <f:facet name="header">Ciudad</f:facet>
-                            #{reporte1_crud.nomCiudad}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Precio Vendido Total</f:facet>
-                            #{reporte1_crud.precioReporte}
-                    </h:column>
-                </h:dataTable>    
-
-
-            </div>
-
+            <!--
+                       <div class="row">
+                           <hr class="my-3"></hr>
+                           <h2 class="form-label text-left"> Matriz </h2>
+                           <h:dataTable class="table table-striped mt-4" >
+                               <h:column>
+                                   <f:facet name="header">#{reporte1_crud.nomCiudad}</f:facet>
+                               </h:column>
+                               <h:column>
+                                   <f:facet name="header">#{reporte1_crud.precioReporte} $ VENDIDOS TOTAL</f:facet>
+                               </h:column>
+                           </h:dataTable>    
+                       </div>
+            -->
+            <hr class="my-3"></hr>
+            <h2 class="form-label text-left"> Matriz </h2>
+            <table class="table caption-top">
+                <caption>Dolares vendido por ciudad</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">CIUDAD</th>
+                        <th scope="col">PRECIO VENDIDO TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>#{reporte1_crud.nomCiudad}</td>
+                        <td>#{reporte1_crud.precioReporte}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
 

@@ -37,7 +37,7 @@ public class factura_crud {
     public DetalleFacturacxc detalleFactura;
     public detalleFacturacxc_crud df_crud = new detalleFacturacxc_crud();
     
-    public ArrayList<Factura> facturas = (ArrayList<Factura>)port.listarFacturasS();
+    public ArrayList<Factura> facturas = (ArrayList<Factura>)port.listarFacturasOrcS();
     public ArrayList<String> listaNombreFactura = cmbNombreFactura();
     
     public ArrayList<Cobrador> cobradores = (ArrayList<Cobrador>) port.listarCobradorS();
@@ -77,10 +77,6 @@ public class factura_crud {
     public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
     }
-
-   
-
-
 
     public detalleFacturacxc_crud getDf_crud() {
         return df_crud;
@@ -189,7 +185,7 @@ public class factura_crud {
         }
 
     public void listarFactura() {
-        facturas = (ArrayList<Factura>) port.listarFacturasS();
+        facturas = (ArrayList<Factura>) port.listarFacturasOrcS();
     }
     
      public cobrador_crud getCob_crud() {

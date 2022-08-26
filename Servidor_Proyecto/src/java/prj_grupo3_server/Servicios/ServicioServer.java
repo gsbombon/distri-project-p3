@@ -722,8 +722,8 @@ public class ServicioServer {
         }
     }
 
-    @WebMethod(operationName = "listarFacturasS")
-    public ArrayList<Factura> listarFacturasS() {       
+    @WebMethod(operationName = "listarFacturasOrcS")
+    public ArrayList<Factura> listarFacturasOrcS() {       
         ArrayList<Factura> art = new ArrayList<>();
         try {
             ConectarOF();

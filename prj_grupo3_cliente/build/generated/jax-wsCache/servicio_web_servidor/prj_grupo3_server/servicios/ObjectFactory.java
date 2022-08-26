@@ -126,8 +126,8 @@ public class ObjectFactory {
     private final static QName _ListarClienteSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarClienteSResponse");
     private final static QName _ListarCobradorS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarCobradorS");
     private final static QName _ListarCobradorSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarCobradorSResponse");
-    private final static QName _ListarFacturasS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarFacturasS");
-    private final static QName _ListarFacturasSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarFacturasSResponse");
+    private final static QName _ListarFacturasOrcS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarFacturasOrcS");
+    private final static QName _ListarFacturasOrcSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarFacturasOrcSResponse");
     private final static QName _ListarFormaPagoS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarFormaPagoS");
     private final static QName _ListarFormaPagoSResponse_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarFormaPagoSResponse");
     private final static QName _ListarMovimientoS_QNAME = new QName("http://Servicios.prj_grupo3_server/", "listarMovimientoS");
@@ -959,19 +959,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ListarFacturasS }
+     * Create an instance of {@link ListarFacturasOrcS }
      * 
      */
-    public ListarFacturasS createListarFacturasS() {
-        return new ListarFacturasS();
+    public ListarFacturasOrcS createListarFacturasOrcS() {
+        return new ListarFacturasOrcS();
     }
 
     /**
-     * Create an instance of {@link ListarFacturasSResponse }
+     * Create an instance of {@link ListarFacturasOrcSResponse }
      * 
      */
-    public ListarFacturasSResponse createListarFacturasSResponse() {
-        return new ListarFacturasSResponse();
+    public ListarFacturasOrcSResponse createListarFacturasOrcSResponse() {
+        return new ListarFacturasOrcSResponse();
     }
 
     /**
@@ -2445,29 +2445,29 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ListarFacturasS }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListarFacturasOrcS }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ListarFacturasS }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ListarFacturasOrcS }{@code >}
      */
-    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "listarFacturasS")
-    public JAXBElement<ListarFacturasS> createListarFacturasS(ListarFacturasS value) {
-        return new JAXBElement<ListarFacturasS>(_ListarFacturasS_QNAME, ListarFacturasS.class, null, value);
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "listarFacturasOrcS")
+    public JAXBElement<ListarFacturasOrcS> createListarFacturasOrcS(ListarFacturasOrcS value) {
+        return new JAXBElement<ListarFacturasOrcS>(_ListarFacturasOrcS_QNAME, ListarFacturasOrcS.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ListarFacturasSResponse }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ListarFacturasOrcSResponse }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ListarFacturasSResponse }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ListarFacturasOrcSResponse }{@code >}
      */
-    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "listarFacturasSResponse")
-    public JAXBElement<ListarFacturasSResponse> createListarFacturasSResponse(ListarFacturasSResponse value) {
-        return new JAXBElement<ListarFacturasSResponse>(_ListarFacturasSResponse_QNAME, ListarFacturasSResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://Servicios.prj_grupo3_server/", name = "listarFacturasOrcSResponse")
+    public JAXBElement<ListarFacturasOrcSResponse> createListarFacturasOrcSResponse(ListarFacturasOrcSResponse value) {
+        return new JAXBElement<ListarFacturasOrcSResponse>(_ListarFacturasOrcSResponse_QNAME, ListarFacturasOrcSResponse.class, null, value);
     }
 
     /**

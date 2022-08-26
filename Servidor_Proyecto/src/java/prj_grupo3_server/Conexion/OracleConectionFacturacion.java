@@ -423,7 +423,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
         String sql = "SELECT * FROM cabecera_factura";
         PreparedStatement statement = con.prepareStatement(sql);
         ResultSet result = statement.executeQuery();
-
+        
         while (result.next()) {
             String total = result.getString("VALOR_CABECERA_FACU");
             int idCliente = result.getInt("CODIGO_CLI");
@@ -435,7 +435,7 @@ public class OracleConectionFacturacion implements ExceptionListener {
             String ciudad = nombreCiudad(idCiudad);
             String fecha = String.valueOf(fechaR);
             String codigo = String.valueOf(idFactura);
-            String tipoPago = "";
+            String tipoPago = "null";
 
             double totalFac = Double.parseDouble(total);
             Factura fac = new Factura();

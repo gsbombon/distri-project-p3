@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para listarFacturasS complex type.
+ * <p>Clase Java para listarFacturasOrcS complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="listarFacturasS"&gt;
+ * &lt;complexType name="listarFacturasOrcS"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "listarFacturasS")
-public class ListarFacturasS {
+@XmlType(name = "listarFacturasOrcS")
+public class ListarFacturasOrcS {
 
 
 }

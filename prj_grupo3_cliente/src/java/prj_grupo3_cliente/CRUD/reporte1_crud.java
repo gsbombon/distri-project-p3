@@ -15,7 +15,7 @@ public class reporte1_crud {
     private ServicioWebServidor service = new ServicioWebServidor();
     ServicioServer port = service.getServicioServerPort();
 
-    public ArrayList<Factura> facturas = (ArrayList<Factura>) port.listarFacturasS();
+    public ArrayList<Factura> facturas = (ArrayList<Factura>) port.listarFacturasOrcS();
     public ArrayList<Ciudad> ciudades = (ArrayList<Ciudad>) port.listarCiudadS();
     public ArrayList<String> listaNombreCiudades = (ArrayList<String>) this.cmbNombreCiudades();
 
@@ -37,7 +37,7 @@ public class reporte1_crud {
     }
 
     public void listarFacturas() {
-        facturas = (ArrayList<Factura>) port.listarFacturasS();
+        facturas = (ArrayList<Factura>) port.listarFacturasOrcS();
         cmbNombreCiudades();
     }
     
